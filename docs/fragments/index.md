@@ -107,3 +107,12 @@ websocket 用于实时通信，保持和后端的长连接；实现实现过程�
 
 ## github pages部署文件deploy.yml
 使用的时候遇到一个问题，以前部署的时候是npm作为包管理器，然后改成pnpm后生成的pnpm-lock.yaml文件，github pages无法识别，导致无法部署
+
+## 删除本地现有的远程分支
+git remote remove origin
+
+## 响应头设置：Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+这是当浏览器请求该接口后，该网页再次请求服务器会把所有的请求都强制变为https协议
+max-age 表示在后面的31536000秒的时间内，浏览器再请求这个域名的时候，都会使用https请求
+includeSubDomains 表示所有子域名也使用https
+preload 表示在浏览器预加载列表中添加该域名，这样在浏览器中访问该域名时，会自动使用https协议（在第一次使用该网站的时候就会使用https，而不是在下一次开始）
