@@ -67,7 +67,6 @@ jobs:
         # 可选参数 if-no-files-found: warn（默认行为 发出警告）/ error (抛出错误，终止工作流程。)/ignore(忽略，继续执行。)指定如果没有找到任何文件时的行为。
         # 指定要上传的文件或目录的路径
             path: docs/.vitepress/dist
-
   # 部署工作
   deploy:
   # 定义一个环境变量，名称为 github-pages , 设置一个 URL变量，该变量引用了 deployment 步骤输出中的 page_url
