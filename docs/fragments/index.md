@@ -106,7 +106,7 @@ websocket 用于实时通信，保持和后端的长连接；实现实现过程�
 以及判断会话id，拦截掉其他会话的消息，避免会话串台。
 
 ## github pages部署文件deploy.yml
-使用的时候遇到一个问题，以前部署的时候是npm作为包管理器，然后改成pnpm后生成的pnpm-lock.yaml文件，github pages无法识别，导致无法部署
+使用的时候遇到一个问题，以前部署的时候是npm作为包管理器，然后改成pnpm后生成的pnpm-lock.yaml文件，github pages无法识别，导致无法部署???
 
 ## 删除本地现有的远程分支
 git remote remove origin
