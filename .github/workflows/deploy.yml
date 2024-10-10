@@ -34,7 +34,8 @@ jobs:
           fetch-depth: 0 # 0获取所有git提交历史记录，默认为1，1表示只获取最近的一次提交记录
       - name: 安装 pnpm 包管理器
         uses: pnpm/action-setup@v3 # 如果使用 pnpm，请取消注释
-        
+        with:
+          version: '9.11.0'
       # - uses: oven-sh/setup-bun@v1 # 如果使用 Bun，请取消注释
       - name: Setup Node
         uses: actions/setup-node@v4
