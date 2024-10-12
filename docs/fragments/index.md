@@ -99,20 +99,46 @@ if (file.name.includes(".md") || file.name.includes(".MD")) {
 ## 会话过程中使用 websocket
 
 websocket 用于实时通信，保持和后端的长连接；实现实现过程中需要实现断线重连，心跳检测，消息去重等功能。
-消息去重：将发送时生成的UUID作为唯一标识，接收时判断是否重复。
+消息去重：将发送时生成的 UUID 作为唯一标识，接收时判断是否重复。
 心跳检测：ws 长连接创建定时像服务端发送心跳包，服务端收到返回确认信息，如果超过一定时间没有收到心跳包，则断开连接，客户端重新连接。
 断线重连：客户端在断开连接后，自动重新连接，重连次数限制 3 次，超过 3 次则提示用户。
-还有就是onmessage收到消息需要对数据进行处理，判断数据是否是流式等
-以及判断会话id，拦截掉其他会话的消息，避免会话串台。
+还有就是 onmessage 收到消息需要对数据进行处理，判断数据是否是流式等
+以及判断会话 id，拦截掉其他会话的消息，避免会话串台。
 
-## github pages部署文件deploy.yml
-使用的时候遇到一个问题, npm i补包后，生成的package-lock.yaml在部署时报错说两个文件依赖不一致？？？
+## github pages 部署文件 deploy.yml
+
+使用的时候遇到一个问题, npm i 补包后，生成的 package-lock.yaml 在部署时报错说两个文件依赖不一致
+尝试安装 pnpm 作为包管理器，jobs 配置在 git 上直接搜 pnpm/action-setup，查看相关配置
+
+```yaml
+- name: Install pnpm
+  uses: pnpm/action-setup@v4 # 如果使用 pnpm，请取消注释
+  with:
+    version: 9
+```
 
 ## 删除本地现有的远程分支
+
 git remote remove origin
 
 ## 响应头设置：Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-这是当浏览器请求该接口后，该网页再次请求服务器会把所有的请求都强制变为https协议
-max-age 表示在后面的31536000秒的时间内，浏览器再请求这个域名的时候，都会使用https请求
-includeSubDomains 表示所有子域名也使用https
-preload 表示在浏览器预加载列表中添加该域名，这样在浏览器中访问该域名时，会自动使用https协议（在第一次使用该网站的时候就会使用https，而不是在下一次开始）
+
+这是当浏览器请求该接口后，该网页再次请求服务器会把所有的请求都强制变为 https 协议
+max-age 表示在后面的 31536000 秒的时间内，浏览器再请求这个域名的时候，都会使用 https 请求
+includeSubDomains 表示所有子域名也使用 https
+preload 表示在浏览器预加载列表中添加该域名，这样在浏览器中访问该域名时，会自动使用 https 协议（在第一次使用该网站的时候就会使用 https，而不是在下一次开始）
+
+## 打包时除屑优化(Tree-Shaking)
+
+除屑优化就是打包时，将没有用到的代码删除，减少打包体积，提高加载速度；在 vite 中，它的底层是依靠 swc、esbuild、rollup 来实现的
+
+- [esbuild（用于开发环境）](https://esbuild.docschina.org/)：打包速度非常快，对开发者热更新体验友好，不过本身并不是为 Tree-Shaking 设计的，在除屑优化方面，esbuild 的表现并不理想
+- [rollup（用于生产环境）](https://www.rollupjs.com/)：依赖与 ESM，对 Tree-Shaking 有着天然的优势，可以通过文件是否被 import 引入来判断是否需要打包，但是打包速度相对 esbuild 较慢，热更新体验较差
+- [swc](<(https://swc.rust-lang.net.cn/blog/perf-swc-vs-babel)>) 是个编译器，它相比于 babel，打包速度更快
+  vite 后续可能使用[rolldown](https://rolldown.rs/contrib-guide/)，底层使用的是 oxc、just，这两者都是 rust 编写的，据说 oxc 比 swc 的编译速度更快
+
+## 关于部署 react-comp 时遇到的部署问题
+
+1. 部署时 vite 配置 base 路径,通过 process.env.GITHUB_REPOSITORY 拿到的变量应该是 github 的/用户名/项目名称,但是部署时需要的变量是/项目名称,导致打包后的文件路径不对
+2. 通过 pnpm build 打包时，构建的文件 index.html 是构建的入口文件，但是打包后的文件路径不对，导致找不到对应的文件；通过 pnpm run build 打包是正常的 （原因是 pnpm build 是直接执行 build 指令，pnpm run build 则是找到 package.json 文件中的 scripts 配置的指令）
+3. react-comp 中关于[https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.worker.min.mjs](https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.worker.min.mjs)这个 cdn 引用，本地运行不会警告，部署托管后会警告跨域，最好是在项目里直接引用文件，而不是通过 cdn 引用
