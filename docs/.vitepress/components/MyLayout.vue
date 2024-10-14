@@ -20,10 +20,10 @@ watch(isDark, (dark) => {
   );
 });
 watch(page, (page) => {
-  if (page.frontmatter.layout === 'home') {
-    document.querySelector('.theme-blog-popover').style.display = 'none'
+  if (page.frontmatter.layout === "home") {
+    document.querySelector(".theme-blog-popover").style.display = "none";
   }
-})
+});
 </script>
 
 <template>
@@ -33,9 +33,22 @@ watch(page, (page) => {
     </template>
     <template #doc-after>
       <div style="margin-top: 24px">
-        <Giscus :key="page.filePath" repo="AutumnFishs/blog" repo-id="R_kgDOM9s-0A" category="Announcements"
-          category-id="DIC_kwDOM9s-0M4CjVeh" mapping="pathname" strict="0" reactions-enabled="1" emit-metadata="0"
-          input-position="bottom" lang="zh-CN" crossorigin="anonymous" :theme="isDark ? 'dark' : 'light'" />
+        <Giscus
+          :key="page.filePath"
+          repo="AutumnFishs/blog"
+          repo-id="R_kgDOM9s-0A"
+          category="Announcements"
+          category-id="DIC_kwDOM9s-0M4CjVeh"
+          mapping="pathname"
+          strict="0"
+          reactions-enabled="1"
+          emit-metadata="0"
+          input-position="top"
+          lang="zh-CN"
+          crossorigin="anonymous"
+          loading="lazy"
+          :theme="isDark ? 'dark' : 'light'"
+        />
       </div>
     </template>
   </BlogTheme.Layout>
