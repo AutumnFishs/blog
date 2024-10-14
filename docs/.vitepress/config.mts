@@ -173,13 +173,13 @@ export default defineConfig({
     // 自定义配置
     // @ts-ignore
     visitor: {
-      badgeId: "smallwhite0410/vitePress",
+      badgeId: "AutumnFishs/blog",
     },
     comment: {
-      repo: "smallwhite0410/vitePress",
-      repoId: "R_kgDOMtDtOA",
+      repo: "AutumnFishs/blog",
+      repoId: "R_kgDOM9s-0A",
       category: "Announcements",
-      categoryId: "DIC_kwDOMtDtOM4CQ7jy",
+      categoryId: "DIC_kwDOM9s-0M4CjVeh",
     },
     // carbonAds: { // 广告
     //   code: "xxx",
