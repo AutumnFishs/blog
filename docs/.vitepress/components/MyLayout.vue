@@ -33,8 +33,8 @@ watch(page, (page) => {
     </template>
     <template #doc-after>
       <div style="margin-top: 24px">
-        <Giscus :key="page.filePath" repo="smallwhite0410/vitePress" repo-id="R_kgDOMtDtOA" category="General"
-          category-id="DIC_kwDOMtDtOM4Ciw8O" mapping="pathname" strict="0" reactions-enabled="1" emit-metadata="0"
+        <Giscus :key="page.filePath" repo="AutumnFishs/blog" repo-id="R_kgDOM9s-0A" category="Announcements"
+          category-id="DIC_kwDOM9s-0M4CjVeh" mapping="pathname" strict="0" reactions-enabled="1" emit-metadata="0"
           input-position="bottom" lang="zh-CN" crossorigin="anonymous" :theme="isDark ? 'dark' : 'light'" />
       </div>
     </template>
