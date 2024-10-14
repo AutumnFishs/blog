@@ -134,7 +134,7 @@ preload 表示在浏览器预加载列表中添加该域名，这样在浏览器
 
 - [esbuild（用于开发环境）](https://esbuild.docschina.org/)：打包速度非常快，对开发者热更新体验友好，不过本身并不是为 Tree-Shaking 设计的，在除屑优化方面，esbuild 的表现并不理想
 - [rollup（用于生产环境）](https://www.rollupjs.com/)：依赖与 ESM，对 Tree-Shaking 有着天然的优势，可以通过文件是否被 import 引入来判断是否需要打包，但是打包速度相对 esbuild 较慢，热更新体验较差
-- [swc](<(https://swc.rust-lang.net.cn/blog/perf-swc-vs-babel)>) 是个编译器，它相比于 babel，打包速度更快
+- [swc](https://swc.rust-lang.net.cn/blog/perf-swc-vs-babel) 是个编译器，它相比于 babel，打包速度更快
   vite 后续可能使用[rolldown](https://rolldown.rs/contrib-guide/)，底层使用的是 oxc、just，这两者都是 rust 编写的，据说 oxc 比 swc 的编译速度更快
 
 ## 关于部署 react-comp 时遇到的部署问题
