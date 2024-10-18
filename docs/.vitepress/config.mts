@@ -62,7 +62,7 @@ const blogTheme = getThemeConfig({
   },
   footer: {
     version: true,
-    copyright: "MIT License | 秋鱼",
+    copyright: "Copyright © | 秋鱼",
   },
   backToTop: {
     // 自定义触发高度

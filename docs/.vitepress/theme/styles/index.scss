@@ -146,7 +146,7 @@
 
 /* 滚动条整体样式 */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 2px;
   /* 滚动条宽度 */
   height: 6px;
   /* 如果是垂直滚动条的高度 */
@@ -176,14 +176,18 @@
 
 /* 主页背景 */
 .VPHome {
-  // 图片来源：https://zhuanlan.zhihu.com/p/54060187  
-  // height: 100vh;
-  // margin-bottom: 0;
-  background-image: url(../../../public/bg.webp);
-  // background-size: cover;
-  .container{
-    background: #fff;
+  // 自定义首页背景图
+  &::before {
+    // 图片来源：https://zhuanlan.zhihu.com/p/54060187
+    background-image: url(../bg.jpg);
+    background-size: cover;
   }
+  // 定义遮罩样式
+  background: radial-gradient(
+    ellipse,
+    rgba(var(--bg-gradient-home), 1) 0%,
+    rgba(var(--bg-gradient-home), 0) 150%
+  );
 }
 
 /* 小于960px不展示公告 */

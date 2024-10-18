@@ -1,7 +1,6 @@
 // https://vitepress.dev/guide/custom-theme
 import { h, onMounted } from "vue";
 import { useData, type EnhanceAppContext, type Theme } from "vitepress";
-import "./styles/index.scss";
 // 自定义组件
 import MyLayout from "../components/MyLayout.vue";
 import MNavLinks from "../components/MNavLinks.vue";
@@ -21,6 +20,7 @@ import "virtual:group-icons.css";
 import mediumZoom from "medium-zoom";
 // 主题配置
 import BlogTheme from "@sugarat/theme";
+import "./styles/index.scss";
 
 export default {
   ...BlogTheme,
