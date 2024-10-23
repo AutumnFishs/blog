@@ -1,3 +1,6 @@
+---
+recommend: 3 
+---
 # 关于 vitePress 的部署
 ## vercel简单部署
 1. vercel注册一下账号

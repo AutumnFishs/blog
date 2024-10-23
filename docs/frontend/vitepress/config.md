@@ -1,6 +1,7 @@
 ---
 sticky: 1
 top: 1
+recommend: 1
 ---
 # 主题配置
 

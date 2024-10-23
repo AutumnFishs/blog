@@ -142,3 +142,39 @@ preload 表示在浏览器预加载列表中添加该域名，这样在浏览器
 1. 部署时 vite 配置 base 路径,通过 process.env.GITHUB_REPOSITORY 拿到的变量应该是 github 的/用户名/项目名称,但是部署时需要的变量是/项目名称,导致打包后的文件路径不对
 2. 通过 pnpm build 打包时，构建的文件 index.html 是构建的入口文件，但是打包后的文件路径不对，导致找不到对应的文件；通过 pnpm run build 打包是正常的 （原因是 pnpm build 是直接执行 build 指令，pnpm run build 则是找到 package.json 文件中的 scripts 配置的指令）
 3. react-comp 中关于[https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.worker.min.mjs](https://unpkg.com/pdfjs-dist@4.7.76/build/pdf.worker.min.mjs)这个 cdn 引用，本地运行不会警告，部署托管后会警告跨域，最好是在项目里直接引用文件，而不是通过 cdn 引用
+
+4. 在写 input 框校验时，遇到这样一个问题。首先我的数据是一个动态数组的形式（数组项是变动的），input 的每项校验是根据数组项的 index 来校验的，然后当数组项增加多的时候，我删除里面某一项数据时，需要删除校验结果，但是因为错误信息是根 index 索引关联的，删除当前项后面的错误消息就会和 input 位置不匹配了（属于是钻牛角尖了），后面给每个生成的数据都生成一个唯一的 uuid，就避免这种因 index 索引造成的错乱了
+
+```jsx
+const [basicConfig, setBasicConfig] = useState({
+  name: "",
+  description: "",
+  hitExample: [
+    {
+      example: "",
+      key: generateUUID(8), // 唯一标识
+    },
+  ],
+  type: "专用工具",
+});
+
+...
+
+{basicConfig.hitExample.length > 1 && (
+  <Trash2
+    size={14}
+    className="absolute right-0 top-2 mr-[5px] cursor-pointer text-[#999] hover:text-[#333]"
+    onClick={() => {
+      const arr = { ...errors };
+      delete arr["hitExample" + item.key];
+      setErrors(arr);
+      setBasicConfig({
+        ...basicConfig,
+        hitExample: basicConfig.hitExample.filter(
+          (_, i) => i !== index
+        ),
+      });
+    }}
+  ></Trash2>
+)}
+```
