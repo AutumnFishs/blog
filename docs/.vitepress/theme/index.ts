@@ -8,9 +8,11 @@ import MNavLink from "../components/MNavLink.vue";
 import BlogConfetti from "../components/BlogConfetti.vue";
 import BlogVisitor from "../components/BlogVisitor.vue";
 import MButton from "../components/MButton.vue";
+
 // vue预览组件插件
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import "@vitepress-code-preview/container/dist/style.css";
+
 // 进度条插件
 // import vitepressNprogress from "vitepress-plugin-nprogress";
 // import "vitepress-plugin-nprogress/lib/css/index.css";
@@ -46,6 +48,8 @@ export default {
     app.component("BlogConfetti", BlogConfetti);
     app.component("BlogVisitor", BlogVisitor);
     app.component("MButton", MButton);
+
+    // svg demo
     useComponents(app, DemoPreview);
   },
   setup() {

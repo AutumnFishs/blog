@@ -1,0 +1,4 @@
+# 忽略依赖包的复制，因为它们会自动安装（构建速度提升五秒）
+node_modules
+.cache
+.DS_Store

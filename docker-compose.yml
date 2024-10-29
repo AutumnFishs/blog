@@ -1,0 +1,30 @@
+services:
+  blog:
+    image: my-blog
+    container_name: blog_container
+    ports:
+      - "8080:80" # 将主机的 8080 端口映射到容器的 80 端口
+    networks:
+      - mynetwork # 连接到名为 mynetwork 的网络
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"] # 使用 curl 测试容器内的 80 端口是否正常
+      interval: 12s # 每 30 秒检查一次
+      timeout: 8s # 如果检查超时，则等待 10 秒
+      retries: 3 # 如果检查失败，则重试 5 次
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok_container
+    network_mode: host # 使用 host 模式，使 ngrok 容器可以直接访问主机网络
+    environment:
+      - NGROK_AUTHTOKEN=2o3iNoel0MphiJ046yRl1cb3Js6_5zyE7AH9jTF9mB3BBhwTW # 设置 Ngrok 认证令牌
+    stdin_open: true  # 等价于 -i
+    tty: true         # 等价于 -t
+    command: ["http", "--url=tightly-gorgeous-asp.ngrok-free.app", "8080"] # 启动 Ngrok 并将本地 8080 端口暴露到外部
+    depends_on:
+      blog:
+        condition: service_healthy # 确保 blog 服务在 ngrok 服务之前启动并且健康
+
+networks:
+  mynetwork: # 定义一个名为 mynetwork 的网络
+    driver: bridge
