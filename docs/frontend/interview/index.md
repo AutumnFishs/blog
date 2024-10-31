@@ -1,6 +1,4 @@
-# 前端
-
-## 业务
+# Demos
 
 1. 如何实现预览 PDF 文件
 
@@ -112,8 +110,8 @@
 
   export default PdfPreview;
   ```
-
   :::
+  
   ::: info 效果
   <iframe src="https://autumnfishs.github.io/react-comp/"  style="width: 100%;height: 400px"></iframe>
   :::

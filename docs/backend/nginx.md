@@ -20,7 +20,7 @@ Nginx 支持 HTTP 响应的缓存，可以显著减少对外部服务器的请�
 ``` conf
 http {
     # proxy_cache_path 用于定义缓存区域的位置和配置参数
-    # path 表示根目录 
+    # path 表示根目录
     # levels 表示目录层级结构 通常为 1:2 表示两级目录
     # max_size=size：指定缓存区域的最大大小（可选）。
     # keys_zone=zone_name:size：指定缓存键的存储区域及其大小。
@@ -99,6 +99,6 @@ http { #http块 : 可以嵌套多个server，配置代理，缓存，日志定�
 
 <<< ./default.conf
 
-::: tip 
+::: tip
 当前笔记，主要参考[菜鸟教程-Nginx配置详解](https://www.runoob.com/w3cnote/nginx-setup-intro.html)以及**项目的部分配置
 :::

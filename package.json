@@ -1,15 +1,40 @@
 {
-    "name": "he",
+    "name": "blog",
     "version": "0.1.0",
+    "author": "noon",
+    "email": "18862665715@163.com",
+    "description": "秋鱼的个人博客",
+    "keywords": [
+        "vitepress",
+        "blog"
+    ],
     "type": "module",
+    "license": "MIT",
+    "homepage": "https://autumnfishs.github.io/blog/",
+    "bugs": {
+        "url": "https://github.com/AutumnFishs/blog/issues",
+        "email": "18862665715@163.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AutumnFishs/blog.git"
+    },
+    "engines": {
+        "node": ">= 18"
+    },
     "scripts": {
         "docs:dev": "vitepress dev docs",
         "docs:build": "vitepress build docs",
-        "docs:preview": "vitepress preview docs --port 8080"
+        "docs:preview": "vitepress preview docs --port 8080",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
     },
     "devDependencies": {
+        "@antfu/eslint-config": "^3.8.0",
         "@giscus/vue": "^3.0.0",
         "@types/node": "^22.5.4",
+        "eslint": "^9.13.0",
+        "eslint-plugin-format": "^0.1.2",
         "flexsearch": "^0.7.43",
         "markdown-it": "^14.1.0",
         "sass": "^1.79.4",

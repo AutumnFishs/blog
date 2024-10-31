@@ -31,7 +31,7 @@
    - docker 镜像源最近不生效
    - 暂时使用 `docker pull docker.fxxk.dedyn.io/library/nginx` 指定源拉取镜像
    - 有时间可以尝试 搭建自己的镜像源 [https://github.com/Mingxiangyu/CF-Workers-docker.io](https://github.com/Mingxiangyu/CF-Workers-docker.io)
-
+   
 ## docker 基本命令
 - `docker run -d -p 8080:80 --name docker-nginx nginx` 启动一下镜像 run 运行，-d 后台运行，-p 端口映射 这里是将容器的 80 端口映射到主机的 8080 端口，--name docker-nginx 创建一个名为 docker-nginx 容器，nginx 在这个容器里运行 nginx
 - `docker stop docker-nginx` 停止容器运行
@@ -39,8 +39,4 @@
 - `docker ps -a` 查看所有容器
 - `docker rm` 容器名称或者 Id 删除容器（删除前先 docker stop 停止运行该容器）
 
-## wsl 无法直接访问windows的localhost代理配置
-1. 手动下载 ubuntu 
-2. docker Desktop 配置 ubuntu 为默认的 linux （docker-desktop、docker-desktop-data仍旧有用，下载乌班图主要是因为它里面的配置齐全，不需要额外的配置）
-3.以管理员身份运行 `wslconfig /setdefault Ubuntu`  修改默认的 linux 为 ubuntu 
 

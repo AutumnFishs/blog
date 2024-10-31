@@ -2,6 +2,7 @@
 title: "杂七杂八"
 tags: ["杂七杂八"]
 ---
+
 # 关于平时遇到的一些杂七杂八的问题
 
 ## Windows 中的 hosts 文件
@@ -182,3 +183,20 @@ const [basicConfig, setBasicConfig] = useState({
   ></Trash2>
 )}
 ```
+
+## 如何选择 LICENSE 协议
+
+[https://isaaxite.github.io/blog/resources/license/](https://isaaxite.github.io/blog/resources/license/)
+
+## ⭐️prettierrc + eslint 配置
+1. 单独配置可以参考一下
+  - [prettierrc 配置文件官网](https://prettier.io/docs/en/configuration)
+  - [参考掘金文章](https://juejin.cn/post/7399273700102832178?searchId=20241031094710F7571A05F0513E67C12F)
+2. 直接eslint实现配置代码风格插件
+  - [@antfu/eslint-config](https://antfu.me/posts/why-not-prettier-zh)
+
+## package.json 配置
+
+- [https://docs.npmjs.com/cli/v10/configuring-npm/package-json](https://docs.npmjs.com/cli/v10/configuring-npm/package-json)
+
+##
