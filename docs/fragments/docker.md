@@ -1,4 +1,8 @@
-# 在本地 docker 上部署项目运行时遇到的一些问题
+---
+tags: ["docker", "部署"]
+---
+
+# Docker 部署 vitepress 博客
 
 ## 使用 docker + ngrok 部署项目
 

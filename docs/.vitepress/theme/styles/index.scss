@@ -178,23 +178,35 @@
 
 /* 主页背景 */
 .VPHome {
+
   // 自定义首页背景图
   &::before {
     // 图片来源：https://zhuanlan.zhihu.com/p/54060187
     background-image: url(../bg.jpg);
     background-size: cover;
   }
+
   // 定义遮罩样式
-  background: radial-gradient(
-    ellipse,
+  background: radial-gradient(ellipse,
     rgba(var(--bg-gradient-home), 1) 0%,
-    rgba(var(--bg-gradient-home), 0) 150%
-  );
+    rgba(var(--bg-gradient-home), 0) 150%);
 }
 
 /* 小于960px不展示公告 */
 @media (max-width: 960px) {
   .theme-blog-popover {
     display: none;
+  }
+}
+
+#VPSidebarNav .sidebar .recommend .recommend-container li {
+  display: flex;
+
+  i {
+    width: 15px;
+  }
+
+  .des {
+    width: calc(100% - 15px);
   }
 }
