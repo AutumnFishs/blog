@@ -23,7 +23,7 @@
      "registry-mirrors": [
        //拉取镜像的镜像加速器 URL 列表
        "https://get.docker.com",
-       "https://download.docker.com"
+       "https://download.docker.com",
      ]
    }
    ```
@@ -38,5 +38,5 @@
 - `docker ps` 查看正在运行的容器
 - `docker ps -a` 查看所有容器
 - `docker rm` 容器名称或者 Id 删除容器（删除前先 docker stop 停止运行该容器）
-
+- ``
 

@@ -70,9 +70,28 @@ const blogTheme = getThemeConfig({
   },
   oml2d: {
     mobileDisplay: true,
+    statusBar: {
+      restMessage: "休息中",
+    },
     models: [
       {
+        name: "shizuku",
+        path: "https://registry.npmmirror.com/oml2d-models/latest/files/models/shizuku/shizuku.model.json",
+        scale: 0.15,
+      },
+      {
+        name: "senko",
         path: "https://registry.npmmirror.com/oml2d-models/latest/files/models/Senko_Normals/senko.model3.json",
+      },
+      {
+        name: "pio",
+        path: "https://registry.npmmirror.com/oml2d-models/latest/files/models/Pio/model.json",
+        scale: 0.2
+      },
+      {
+        name: "HK416-1-normal",
+        path: "https://model.oml2d.com/HK416-1-normal/model.json",
+        scale: 0.06,
       },
     ],
   },
@@ -85,7 +104,7 @@ export default defineConfig({
   // 主题配置
   extends: blogTheme,
   // 基准路径
-  base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
+  base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/blog", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
   /* 站点标题 */
   title: "秋鱼的笔记",
   /* 站点描述 */
@@ -105,6 +124,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [groupIconVitePlugin(), viteDemoPreviewPlugin(), vueJsx()],
+    server: {
+      host: "0.0.0.0",
+      port: 3001,
+    },
   },
   /* 去除url上.html后缀 */
   cleanUrls: true,
