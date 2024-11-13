@@ -104,7 +104,8 @@ export default defineConfig({
   // 主题配置
   extends: blogTheme,
   // 基准路径
-  base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/blog", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
+  base:'/blog',
+  // base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/blog", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
   /* 站点标题 */
   title: "秋鱼的笔记",
   /* 站点描述 */
