@@ -109,7 +109,7 @@ export default defineConfig({
   /* 站点标题 */
   title: "秋鱼的笔记",
   /* 站点描述 */
-  description: "这就是一份笔记...",
+  description: "个人博客demo",
   /* 头部 */
   head,
   /* 语言 */
