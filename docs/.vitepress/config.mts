@@ -104,8 +104,7 @@ export default defineConfig({
   // 主题配置
   extends: blogTheme,
   // 基准路径
-  base:'/blog',
-  // base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/blog", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
+  base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/blog", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
   /* 站点标题 */
   title: "秋鱼的笔记",
   /* 站点描述 */
@@ -160,7 +159,7 @@ export default defineConfig({
     },
     /* 导航栏右侧 */
     socialLinks: [
-      { icon: "github", link: "https://github.com/smallwhite0410/vitePress" },
+      { icon: "github", link: "https://github.com/autumnfishs/blog" },
     ],
     /* 导航栏 */
     nav,
