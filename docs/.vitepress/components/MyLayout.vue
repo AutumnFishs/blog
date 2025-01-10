@@ -1,12 +1,14 @@
 <script setup>
 import Giscus from "@giscus/vue";
-// import DefaultTheme from "vitepress/theme";
-import BlogTheme from "@sugarat/theme";
-import { watch } from "vue";
+import DefaultTheme from "vitepress/theme";
+import { onMounted, watch, computed } from "vue";
 import { inBrowser, useData } from "vitepress";
-// Layout 可以实现自定义
+import { data } from '../theme/post.data'
+import DetailedPostCard from './DetailedPostCard.vue'
 
-const { isDark, page } = useData();
+
+const { Layout } = DefaultTheme
+const { isDark, page, frontmatter } = useData();
 watch(isDark, (dark) => {
   if (!inBrowser) return;
 
@@ -19,39 +21,47 @@ watch(isDark, (dark) => {
     "https://giscus.app"
   );
 });
+
+onMounted(() => {
+  document.querySelector(".VPFooter").style.display = "none";
+})
+
 watch(page, (page) => {
+  console.log(page);
+
   if (page.frontmatter.layout === "home") {
-    document.querySelector(".theme-blog-popover").style.display = "none";
+    document.querySelector(".VPFooter").style.display = "none";
+  } else {
+    document.querySelector(".VPFooter").style.display = "block";
   }
 });
+
+const computedRecentPosts = computed(() => data.recentPosts.map(item =>
+  ({ ...item, date: item.date.string })))
 </script>
 
 <template>
-  <BlogTheme.Layout>
-    <template #nav-bar-title-after>
-      <BlogVisitor />
-    </template>
-    <template #doc-after>
-      <div style="margin-top: 24px">
-        <Giscus
-          :key="page.filePath"
-          repo="AutumnFishs/blog"
-          repo-id="R_kgDOM9s-0A"
-          category="Announcements"
-          category-id="DIC_kwDOM9s-0M4CjVeh"
-          mapping="pathname"
-          strict="0"
-          reactions-enabled="1"
-          emit-metadata="0"
-          input-position="top"
-          lang="zh-CN"
-          crossorigin="anonymous"
-          loading="lazy"
-          :theme="isDark ? 'dark' : 'light'"
-        />
+  <Layout>
+    <template #home-features-before>
+      <div v-if="frontmatter.layout === 'home'">
+        <home>
+          <template #main>
+            <div class="max-w-screen-lg w-full px-6 py-8 my-0 mx-auto">
+              <DetailedPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
+                :title="article.title" :abstract="article.abstract" :date="article.date" :tags="article.tags" />
+            </div>
+          </template>
+        </home>
       </div>
     </template>
-  </BlogTheme.Layout>
+    <template #doc-after>
+      <div class="mt-[24px]">
+        <Giscus :key="page.filePath" repo="AutumnFishs/blog" repo-id="R_kgDOM9s-0A" category="Announcements"
+          category-id="DIC_kwDOM9s-0M4CjVeh" mapping="pathname" strict="0" reactions-enabled="1" emit-metadata="0"
+          input-position="top" lang="zh-CN" crossorigin="anonymous" loading="lazy" :theme="isDark ? 'dark' : 'light'" />
+      </div>
+    </template>
+  </Layout>
 </template>
 <style lang="scss" scoped>
 .home {

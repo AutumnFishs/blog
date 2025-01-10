@@ -1,12 +1,13 @@
 import { DefaultTheme } from "vitepress";
 
 export const nav: DefaultTheme.NavItem[] = [
-  { text: "首页", link: "/" },
-  { text: "导航", link: "/navpage/index.html" },
+  { text: "博客", link: "/" },
+  { text: "导航", link: "/pages/navpage" },
   {
-    text: "前端",
-    link: "/frontend/index.html",
+    text: "归档",
+    link: "/pages/archives",
   },
-  { text: "日志", link: "/fragments/index.html" },
-  { text: "其他", link: "/fragments/index.html" },
+  { text: "标签", link: "/pages/tags" },
+  { text: "日志", link: "/pages/logs" },
+  { text: "关于", link: "/pages/about" },
 ];

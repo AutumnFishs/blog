@@ -1,4 +1,4 @@
-// https://vitepress.dev/guide/custom-theme
+import DefaultTheme from "vitepress/theme";
 import { h, onMounted } from "vue";
 import { useData, type EnhanceAppContext, type Theme } from "vitepress";
 // 自定义组件
@@ -8,24 +8,27 @@ import MNavLink from "../components/MNavLink.vue";
 import BlogConfetti from "../components/BlogConfetti.vue";
 import BlogVisitor from "../components/BlogVisitor.vue";
 import MButton from "../components/MButton.vue";
+import BlogHeader from "../components/BlogHeader.vue";
+import Home from "../components/Home.vue";
+import DetailedPostCard from "../components/DetailedPostCard.vue";
 
 // vue预览组件插件
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import "@vitepress-code-preview/container/dist/style.css";
 
 // 进度条插件
-// import vitepressNprogress from "vitepress-plugin-nprogress";
-// import "vitepress-plugin-nprogress/lib/css/index.css";
+import vitepressNprogress from "vitepress-plugin-nprogress";
+import "vitepress-plugin-nprogress/lib/css/index.css";
 // 文件图标库
 import "virtual:group-icons.css";
 // 图片放大插件
 import mediumZoom from "medium-zoom";
 // 主题配置
-import BlogTheme from "@sugarat/theme";
+import "./styles/tailwind.css";
 import "./styles/index.scss";
 
 export default {
-  ...BlogTheme,
+  extends: DefaultTheme,
   Layout: () => {
     const props: Record<string, any> = {};
 
@@ -33,7 +36,6 @@ export default {
 
     if (frontmatter.value?.layoutClass) {
       props.class = frontmatter.value.layoutClass;
-      console.log(frontmatter.value);
     }
 
     return h(MyLayout, props, {
@@ -42,14 +44,16 @@ export default {
   },
   enhanceApp(ctx: EnhanceAppContext) {
     const { app } = ctx;
-    // vitepressNprogress(ctx);
+    vitepressNprogress(ctx);
     app.component("MNavLinks", MNavLinks);
     app.component("MNavLink", MNavLink);
     app.component("BlogConfetti", BlogConfetti);
     app.component("BlogVisitor", BlogVisitor);
     app.component("MButton", MButton);
+    app.component("BlogHeader", BlogHeader);
+    app.component("Home", Home);
+    app.component("DetailedPostCard", DetailedPostCard);
 
-    // svg demo
     useComponents(app, DemoPreview);
   },
   setup() {
