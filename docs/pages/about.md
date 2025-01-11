@@ -3,14 +3,14 @@ layout: page
 ---
 # 关于
 
-## 关于我
 
-- 前端开发工程师
-- 热爱编程，喜欢新技术
-- 热爱分享，喜欢开源
-- 热爱运动，喜欢健身
+## 关于我
+- 一名前端开发工程师，目前就职于山东一家互联网公司
+- 
+
 
 ## 关于博客
-
-- 本博客基于 [VuePress](https://vuepress.vuejs.org/) 搭建
-- 主题基于 [vuepress-theme-vdoing](https://github.com/xugaoyi/vuepress-theme-vdoing) 修改
+- 本博客基于 [vitepress](https://vuepress.vuejs.org/) 搭建
+- 关于导航页面使用的是[茂茂物语](https://fe-nav.netlify.app/nav/)的导航页面样式
+- 关于归档、标签、以及列表使用的是[无声2017的博客](https://ivestszheng.github.io/)
+- 评论使用的插件[giscus](https://giscus.app/zh-CN)，通过github的issue实现评论功能

@@ -24,6 +24,8 @@ interface data {
 declare const data: Post[];
 export { data };
 
+
+// 将日期格式化为 {time: number, string: string} 类型
 function formatDate(raw: string): Post["date"] {
   const date = new Date(raw);
   const year = date.getFullYear();
@@ -37,9 +39,13 @@ function formatDate(raw: string): Post["date"] {
 
 export default createContentLoader("posts/*/*.md", {
   transform(raw): data {
+    // post
     const postMap = {};
+    // 归档数据映射
     const yearMap = {};
+    // 标签数据映射
     const tagMap = {};
+
     const posts = raw
       .map(({ url, frontmatter }) => {
         let tags = [url.split("/")[2]];
@@ -58,6 +64,7 @@ export default createContentLoader("posts/*/*.md", {
       })
       .sort((a, b) => b.date.time - a.date.time);
 
+    
     const recentPosts = posts.slice(0, 10).map((item) => ({ ...item }));
 
     posts.forEach((item) => {

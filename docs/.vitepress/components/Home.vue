@@ -15,7 +15,7 @@
             </ul>
             <img class="header-btn" src="../public/icon.svg" alt="鼠标滚动" @click="handleClick">
         </header>
-        <main class="main" ref="mainRef">
+        <main class="main relative" ref="mainRef">
             <slot name='main'></slot>
         </main>
         <footer class="footer">
@@ -42,7 +42,7 @@ console.log(blog);
 const inspiringTimeout = blog.inspiringTimeout || 10000
 const isShowInspiring = ref(0)
 setInterval(() => {
-    if (isShowInspiring.value >= blog.inspiring.length) {
+    if (isShowInspiring.value >= blog.inspiring.length - 1) {
         isShowInspiring.value = 0
     } else {
         isShowInspiring.value += 1
@@ -51,12 +51,18 @@ setInterval(() => {
 </script>
 
 <style scoped lang="scss">
+
 .home {
     position: absolute;
     top: 0;
     left: 0;
     padding: 0;
     margin: 0;
+    box-sizing: content-box;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     .bg {
         width: 100vw;
@@ -70,6 +76,7 @@ setInterval(() => {
     .header {
         width: 100vw;
         height: 100vh;
+        padding-top: 64px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -84,16 +91,15 @@ setInterval(() => {
         }
 
         .title {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 10px 0;
+            font-size: 32px;
         }
 
         .description {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 400;
             opacity: 0.7;
             color: #999;
+            padding: 10px 0;
         }
 
         .banner {
@@ -101,7 +107,8 @@ setInterval(() => {
 
             li {
                 text-align: center;
-                margin: 10px auto;
+                margin: auto;
+                font-size: 16px;
             }
         }
 

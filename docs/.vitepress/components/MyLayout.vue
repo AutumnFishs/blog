@@ -1,7 +1,7 @@
 <script setup>
 import Giscus from "@giscus/vue";
 import DefaultTheme from "vitepress/theme";
-import { onMounted, watch, computed } from "vue";
+import { onMounted, watch, computed, ref } from "vue";
 import { inBrowser, useData } from "vitepress";
 import { data } from '../theme/post.data'
 import DetailedPostCard from './DetailedPostCard.vue'
@@ -27,17 +27,30 @@ onMounted(() => {
 })
 
 watch(page, (page) => {
-  console.log(page);
-
   if (page.frontmatter.layout === "home") {
     document.querySelector(".VPFooter").style.display = "none";
   } else {
     document.querySelector(".VPFooter").style.display = "block";
   }
 });
+const posts = computed(() => Object.values(data.postMap))
+const computedRecentPosts = computed(() =>
+  posts.value
+    .map(item => ({ ...item, date: item.date.string }))
+    .slice((pageNum.value - 1) * pageSize.value, pageNum.value * pageSize.value)
+)
 
-const computedRecentPosts = computed(() => data.recentPosts.map(item =>
-  ({ ...item, date: item.date.string })))
+const pageNum = ref(1)
+const pageSize = ref(10)
+
+const handleNext = (val) => {
+  pageNum.value = val
+}
+
+const handlePrev = (val) => {
+  pageNum.value = val
+}
+
 </script>
 
 <template>
@@ -46,9 +59,13 @@ const computedRecentPosts = computed(() => data.recentPosts.map(item =>
       <div v-if="frontmatter.layout === 'home'">
         <home>
           <template #main>
-            <div class="max-w-screen-lg w-full px-6 py-8 my-0 mx-auto">
+            <div class="main">
               <DetailedPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
                 :title="article.title" :abstract="article.abstract" :date="article.date" :tags="article.tags" />
+              <div class="main-pagination">
+                <el-pagination size="small" background layout="prev, pager, next" @next-click="handleNext"
+                  @prev-click="handlePrev" :total="posts.length" class="mt-4" />
+              </div>
             </div>
           </template>
         </home>
@@ -64,55 +81,25 @@ const computedRecentPosts = computed(() => data.recentPosts.map(item =>
   </Layout>
 </template>
 <style lang="scss" scoped>
-.home {
+.main {
+  max-width: 1024px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
-  max-width: 1126px;
-}
+  box-sizing: border-box;
+  position: relative;
 
-@media screen and (min-width: 960px) {
-  .home {
-    padding-top: var(--vp-nav-height);
-  }
-}
-
-.header-banner {
-  width: 100%;
-  padding: 60px 0;
-}
-
-.content-wrapper {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.blog-list-wrapper {
-  width: 100%;
-}
-
-.blog-info-wrapper {
-  margin-left: 16px;
-  position: sticky;
-  top: 100px;
-}
-
-@media screen and (max-width: 959px) {
-  .blog-info-wrapper {
-    margin-left: 16px;
-    position: sticky;
-    top: 40px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .content-wrapper {
-    flex-wrap: wrap;
-  }
-
-  .blog-info-wrapper {
-    margin: 20px 0;
+  .main-pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     width: 100%;
+    margin: 20px;
+
+    .el-pagination.is-background>ul.el-pager>li.is-active.number {
+      background: var(--sb-thumb-color) !important;
+    }
   }
 }
+
 </style>

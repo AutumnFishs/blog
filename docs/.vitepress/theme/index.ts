@@ -11,6 +11,7 @@ import MButton from "../components/MButton.vue";
 import BlogHeader from "../components/BlogHeader.vue";
 import Home from "../components/Home.vue";
 import DetailedPostCard from "../components/DetailedPostCard.vue";
+import BlogArchives from "../components/BlogArchives.vue";
 
 // vue预览组件插件
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
@@ -53,6 +54,7 @@ export default {
     app.component("BlogHeader", BlogHeader);
     app.component("Home", Home);
     app.component("DetailedPostCard", DetailedPostCard);
+    app.component("BlogArchives", BlogArchives);
 
     useComponents(app, DemoPreview);
   },
