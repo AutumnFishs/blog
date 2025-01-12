@@ -1,4 +1,9 @@
 ---
+title: vitepress相关插件
+date: 2023-05-25 14:47:52
+abstract: 记录了一些之前使用过的vitepress插件，方便以后查阅。
+tags: 
+   - vitepress
 recommend: 4
 ---
 

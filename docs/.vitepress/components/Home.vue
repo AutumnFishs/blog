@@ -29,8 +29,14 @@
 
 <script setup lang="ts">
 import { useData } from 'vitepress'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
+onMounted(() => {
+    const VPNavBar = document.querySelector('.VPNavBar')
+    if (VPNavBar) {
+        VPNavBar.classList.add('.home')
+    }
+})
 const { site, frontmatter } = useData()
 const mainRef = ref()
 const handleClick = () => {
@@ -38,7 +44,6 @@ const handleClick = () => {
 }
 const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter.value.bgImage : ''
 const blog = frontmatter.value.blog
-console.log(blog);
 const inspiringTimeout = blog.inspiringTimeout || 10000
 const isShowInspiring = ref(0)
 setInterval(() => {
@@ -51,7 +56,6 @@ setInterval(() => {
 </script>
 
 <style scoped lang="scss">
-
 .home {
     position: absolute;
     top: 0;

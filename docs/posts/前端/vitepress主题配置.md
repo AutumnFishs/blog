@@ -1,19 +1,59 @@
 ---
 title: Vitepress主题配置
 date: 2023-04-13 16:32:00
-categories:
-  - 前端
+abstract: 使用过程中的一些vitepress的配置项，开始使用的时候多少有些不熟悉，配置习惯后，也就不需要了，主要还是强化记忆吧。
 tags:
   - Vitepress
   - 主题配置
-sticky: 1
-top: 1
-recommend: 1
 ---
 # 主题配置
 
 ## 默认主题配置
-<!-- <<< ../../.vitepress/config.mts -->
+::: info 默认主题配置
+默认主题配置在`docs/.vitepress/theme/index.js`中，具体配置如下：
+```ts
+import DefaultTheme from "vitepress/theme";
+import { h, onMounted } from "vue";
+import { useData, type EnhanceAppContext, type Theme } from "vitepress";
+// 自定义组件
+import MButton from "../components/MButton.vue";
+// 主题配置
+import "./styles/index.scss";
+
+export default {
+  extends: DefaultTheme,
+  Layout: () => {
+    const props: Record<string, any> = {};
+
+    const { frontmatter } = useData();
+
+    if (frontmatter.value?.layoutClass) {
+      props.class = frontmatter.value.layoutClass;
+    }
+
+    return h(MyLayout, props, {
+      // https://vitepress.dev/guide/extending-default-theme#layout-slots
+      // 这里一般是自定义组件，通过插槽的方式插入到默认主题中
+    });
+  },
+  enhanceApp(ctx: EnhanceAppContext) {
+    const { app } = ctx;
+    vitepressNprogress(ctx);
+    app.component("MButton", MButton);
+
+    useComponents(app, DemoPreview);
+  },
+  setup() {
+    onMounted(() => {
+      mediumZoom("[data-zoomable]", { background: "var(--vp-c-bg)" }); // 默认
+      // mediumZoom("#app img", { background: "var(--vp-c-bg)" }); // 不显式添加{data-zoomable}的情况下为所有图像启用此功能
+    });
+  },
+} satisfies Theme;
+
+```
+:::
+
 
 ## 侧边栏简单配置
 

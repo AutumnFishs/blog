@@ -1,14 +1,18 @@
 ---
-recommend: 3 
+title: vitePress项目部署
+date: 2023-04-11 10:54:00
+abstract: 记录一下博客部署的过程，这里暂时使用vercel和github page两种方式，docker部署当时没想起来记录，以后再补上
+tags:
+  - vitepress
 ---
 # 关于 vitePress 的部署
 ## vercel简单部署
 1. vercel注册一下账号
-![第1~4步](/vitepress/deploy/20240906142847.png){data-zoomable}
+![第1~4步](/vercel部署github项目1.png){data-zoomable}
 2. 添加一下github账号
 3. 选中添加的github账号
 4. 在需要构建的项目后点击import
-![第5~8步](/vitepress/deploy/20240906142901.png){data-zoomable}
+![第5~8步](/vercel部署github项目2.png){data-zoomable}
 5. project name 命名
 6. 根目录它也会自动识别
 7. 构建设置把前两项选上

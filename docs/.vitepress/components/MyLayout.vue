@@ -51,6 +51,9 @@ const handlePrev = (val) => {
   pageNum.value = val
 }
 
+const handleChange = (currentPageNum, currentPageSize) => {
+  pageNum.value = currentPageNum
+}
 </script>
 
 <template>
@@ -63,13 +66,17 @@ const handlePrev = (val) => {
               <DetailedPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
                 :title="article.title" :abstract="article.abstract" :date="article.date" :tags="article.tags" />
               <div class="main-pagination">
-                <el-pagination size="small" background layout="prev, pager, next" @next-click="handleNext"
-                  @prev-click="handlePrev" :total="posts.length" class="mt-4" />
+                <el-pagination size="small" background layout="prev, pager, next" @next-click="handleChange"
+                  :hide-on-single-page="true" @prev-click="handleChange" @change="handleChange" :total="posts.length"
+                  class="mt-4" />
               </div>
             </div>
           </template>
         </home>
       </div>
+    </template>
+    <template #layout-bottom>
+      <BlogGoTop />
     </template>
     <template #doc-after>
       <div class="mt-[24px]">
@@ -101,5 +108,4 @@ const handlePrev = (val) => {
     }
   }
 }
-
 </style>
