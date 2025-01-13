@@ -8,7 +8,7 @@ import DetailedPostCard from './DetailedPostCard.vue'
 
 
 const { Layout } = DefaultTheme
-const { isDark, page, frontmatter } = useData();
+const { isDark, page, frontmatter, site } = useData();
 watch(isDark, (dark) => {
   if (!inBrowser) return;
 
@@ -22,17 +22,6 @@ watch(isDark, (dark) => {
   );
 });
 
-onMounted(() => {
-  document.querySelector(".VPFooter").style.display = "none";
-})
-
-watch(page, (page) => {
-  if (page.frontmatter.layout === "home") {
-    document.querySelector(".VPFooter").style.display = "none";
-  } else {
-    document.querySelector(".VPFooter").style.display = "block";
-  }
-});
 const posts = computed(() => Object.values(data.postMap))
 const computedRecentPosts = computed(() =>
   posts.value
@@ -43,41 +32,43 @@ const computedRecentPosts = computed(() =>
 const pageNum = ref(1)
 const pageSize = ref(10)
 
-const handleNext = (val) => {
-  pageNum.value = val
-}
-
-const handlePrev = (val) => {
-  pageNum.value = val
-}
-
 const handleChange = (currentPageNum, currentPageSize) => {
   pageNum.value = currentPageNum
 }
+
+// 背景图
+const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter.value.bgImage : ''
 </script>
 
 <template>
   <Layout>
-    <template #home-features-before>
-      <div v-if="frontmatter.layout === 'home'">
-        <home>
-          <template #main>
-            <div class="main">
-              <DetailedPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
-                :title="article.title" :abstract="article.abstract" :date="article.date" :tags="article.tags" />
-              <div class="main-pagination">
-                <el-pagination size="small" background layout="prev, pager, next" @next-click="handleChange"
-                  :hide-on-single-page="true" @prev-click="handleChange" @change="handleChange" :total="posts.length"
-                  class="mt-4" />
-              </div>
+    <!-- home -->
+    <template #layout-top>
+      <home v-if="frontmatter.layout === 'home'">
+        <div :class="`bg bg-[url(${bg})]`" :style="{
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }"></div>
+        <template #main>
+          <div class="main">
+            <DetailedPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
+              :title="article.title" :abstract="article.abstract" :date="article.date" :tags="article.tags" />
+            <div class="main-pagination">
+              <el-pagination size="small" background layout="prev, pager, next" @next-click="handleChange"
+                :hide-on-single-page="true" @prev-click="handleChange" @change="handleChange" :total="posts.length"
+                class="mt-4" />
             </div>
-          </template>
-        </home>
-      </div>
+          </div>
+        </template>
+      </home>
     </template>
+
+    <!-- 回到顶部 -->
     <template #layout-bottom>
       <BlogGoTop />
     </template>
+
+    <!-- giscus评论 -->
     <template #doc-after>
       <div class="mt-[24px]">
         <Giscus :key="page.filePath" repo="AutumnFishs/blog" repo-id="R_kgDOM9s-0A" category="Announcements"
@@ -88,6 +79,17 @@ const handleChange = (currentPageNum, currentPageSize) => {
   </Layout>
 </template>
 <style lang="scss" scoped>
+.bg {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -100;
+  overflow: hidden;
+
+}
+
 .main {
   max-width: 1024px;
   width: 100%;
@@ -102,6 +104,8 @@ const handleChange = (currentPageNum, currentPageSize) => {
     align-items: center;
     width: 100%;
     margin: 20px;
+
+
 
     .el-pagination.is-background>ul.el-pager>li.is-active.number {
       background: var(--sb-thumb-color) !important;

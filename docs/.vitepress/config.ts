@@ -14,9 +14,9 @@ import {
   groupIconVitePlugin,
 } from "vitepress-plugin-group-icons";
 // element plus 按需引入
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { nav, head } from "./theme/config";
 // 主题相关配置
 
@@ -64,10 +64,6 @@ export default defineConfig({
   cleanUrls: true,
   /* 默认主题配置 */
   themeConfig: {
-    /* 站点logo */
-    // logo: "",
-    /*  */
-    siteTitle: "hyj",
     /* 本地搜索 */
     search: {
       provider: "local",
@@ -105,8 +101,8 @@ export default defineConfig({
       next: "下一篇",
     },
     footer: {
-      message: "",
-      copyright: "Copyright © 2024",
+      message: "Released under the MIT License",
+      copyright: "Copyright © 2024-2025 hyj",
     },
     /* 只在屏幕小于xxx生效，一般是移动端 */
     returnToTopLabel: "回到顶部",

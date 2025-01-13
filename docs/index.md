@@ -11,6 +11,7 @@ blog:
   - 生活的真谛不在繁华，而在于淡泊
  inspiringTimeout: 6000
  pageSize: 6
-# bgImage: bg.jpg
+bgImage: bg.jpg
 ---
+
 

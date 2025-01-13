@@ -1,5 +1,5 @@
 <template>
-    <div class="go-top" @click="goTop">
+    <div class="go-top" @click="scrollToTop">
         <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
             <g fill="none">
                 <path
@@ -13,23 +13,18 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-const goTop = () => {
-    const homeDom = document.querySelector('.home')
-    if (homeDom) {
-        homeDom.scrollTop = 0
-    }
+function scrollToTop() {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 }
+
 onMounted(() => {
-    const homeDom = document.querySelector('.home')
-    if (homeDom) {
-        homeDom.addEventListener('scroll', (event) => {
-            if (homeDom.scrollTop > 100) {
-                document.querySelector('.go-top')?.classList.add('show')
-            } else {
-                document.querySelector('.go-top')?.classList.remove('show')
-            }
-        })
-    }
+    document.addEventListener('scroll', (event) => {
+        if (document.documentElement.scrollTop > 100) {
+            document.querySelector('.go-top')?.classList.add('show')
+        } else {
+            document.querySelector('.go-top')?.classList.remove('show')
+        }
+    })
 
 })
 
@@ -38,7 +33,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .go-top {
     position: fixed;
-    right: 200px;
+    right: 80px;
     top: calc(100vh - 200px);
     transform: rotate(-45deg);
     background: var(--sb-thumb-bg-color);

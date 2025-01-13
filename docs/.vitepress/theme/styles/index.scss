@@ -95,22 +95,20 @@
 @font-face {
   font-family: 'HongLeiBanShuJianTi';
   src:
-    url('./font/HongLeiBanShuJianTi-2.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    url('/font/HongLeiBanShuJianTi-2.woff2') format('woff2'),
+    url('/font/HongLeiBanShuJianTi-2.ttf') format('truetype');
 }
 
 // 杨任东竹石体
 @font-face {
   font-family: 'YangRenDongZhuShiTi-Light';
   src:
-    url('./font/YangRenDongZhuShiTi-Light-2.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    url('/font/YangRenDongZhuShiTi-Light-2.woff2') format('woff2'),
+    url('/font/YangRenDongZhuShiTi-Light-2.ttf') format('truetype');
 }
 
 // 全局字体
-body {
+* {
   font-family: 'YangRenDongZhuShiTi-Light';
 }
 
@@ -234,4 +232,9 @@ body {
 .VPNav .VPNavBarTitle>a>span {
   font-family: 'HongLeiBanShuJianTi', sans-serif !important;
   font-size: 20px;
+}
+
+
+.Layout>#VPContent.VPContent.is-home>.VPHome {
+  display: none !important;
 }

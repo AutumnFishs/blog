@@ -12,6 +12,7 @@ import BlogHeader from "../components/BlogHeader.vue";
 import Home from "../components/Home.vue";
 import DetailedPostCard from "../components/DetailedPostCard.vue";
 import BlogArchives from "../components/BlogArchives.vue";
+import BlogTags from "../components/BlogTags.vue";
 import BlogGoTop from "../components/BlogGoTop.vue";
 
 // vue预览组件插件
@@ -57,6 +58,7 @@ export default {
     app.component("DetailedPostCard", DetailedPostCard);
     app.component("BlogArchives", BlogArchives);
     app.component("BlogGoTop", BlogGoTop);
+    app.component("BlogTags", BlogTags);
 
     useComponents(app, DemoPreview);
   },

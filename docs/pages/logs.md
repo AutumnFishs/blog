@@ -21,11 +21,41 @@ title: 日志
 
 
 ## 主题变更
-+ 2025-01-11：字体样式更新，
-+ 2025-01-10：之前使用第三方主题`@sugarat/theme`，现转为自定义实现（主要是之前的主题感觉有点花哨，想做一个简约风的主题）
+### 2025-01-12：主页样式微调，ttf字体压缩woff2格式，优化字体加载速度
+  + 主要变更：
+    - 回到顶部功能添加
+  + 需要修复的bug：
+    - 首页刷新页面字体正常，但切换到其他页面刷新后字体样式丢失(已修复)
+  + 修复bug：
+    ::: info BUG：修复其他页面刷新后字体样式丢失
+    原因：主要是字体引入的文件地址没有绝对路径，导致刷新后无法找到字体文件
+    - 修复前
+    ``` css
+    @font-face {
+      font-family: 'HongLeiBanShuJianTi';
+      src:
+        url('./font/HongLeiBanShuJianTi-2.woff2') format('woff2'),
+        url('./font/HongLeiBanShuJianTi-2.ttf') format('truetype');
+    }
+    ```
+    - 修复后
+    ``` css
+    @font-face {
+      font-family: 'HongLeiBanShuJianTi';
+      src:
+        url('/font/HongLeiBanShuJianTi-2.woff2') format('woff2'),
+        url('/font/HongLeiBanShuJianTi-2.ttf') format('truetype');
+    }
+    ```
+    :::
+### 2025-01-11：字体样式更新
+  + 主要变更：
+    - 字体样式更新,右上角导航栏标题使用`HongLeiBanShuJianTi`,其余博客字体样式使用`YangRenDongZhuShiTi-Light`
+  
+### 2025-01-10：之前使用第三方主题  @sugarat/theme  ，现转为自定义实现（主要是之前的主题感觉有点花哨，想做一个简约风的主题）
   + 主要变更：
     - 博客迁移到posts目录下，方便后续实现归档、分类、标签等功能
-    - home页面实现（首页）
+    - 首页样式实现
     - 借鉴`ivestszheng.github.io`实现首页列表、归档页面、标签页面（主要是通过`createContentLoader`vitepress内置api实现获取文章信息）
   + 需要修复的bug：
     - 主页面在`width:100vw`样式下始终会有横滚无法移除（已修复）

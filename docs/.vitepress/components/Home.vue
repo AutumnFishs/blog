@@ -1,10 +1,5 @@
 <template>
     <div class="home">
-        <div class="bg" :style="{
-            backgroundImage: `url(${bg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-        }"></div>
         <header class="header">
             <img v-if="site.themeConfig.logo" class="logo" :src="site.themeConfig.logo"></img>
             <div class="title">{{ blog.name }}</div>
@@ -13,36 +8,57 @@
                 <li v-for="(item, index) in blog.inspiring" :key="index" v-show="isShowInspiring === index">{{ item }}
                 </li>
             </ul>
-            <img class="header-btn" src="../public/icon.svg" alt="鼠标滚动" @click="handleClick">
+            <div ref="headerBtnRef" class="header-btn" @click="handleClick">
+                <svg class="icon" t="1736307361577" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="1879">
+                    <path
+                        d="M529.408 210.688c-66.816 0-121.088 54.272-121.088 119.552v189.184c0 66.816 55.552 119.552 121.088 119.552 66.816 0 119.552-54.272 119.552-119.552V330.24c0-66.816-54.016-119.552-119.552-119.552z m93.184 307.2c0 51.456-41.728 93.184-93.184 93.184s-94.464-41.728-94.464-93.184v-189.184c0-51.456 43.008-93.184 94.464-93.184s93.184 41.728 93.184 93.184v189.184z"
+                        fill="#444444" p-id="1880"></path>
+                    <path
+                        d="M528.128 289.792c-6.912 0-13.824 5.632-13.824 13.824v66.816c0 6.912 5.632 13.824 13.824 13.824 6.912 0 13.824-5.632 13.824-13.824v-66.816c0-8.192-5.632-13.824-13.824-13.824z"
+                        fill="#D86E1B" p-id="1881"></path>
+                    <path
+                        d="M528.128 864.256l19.456-32 19.456-32-37.632 15.36-37.632-15.36 36.352 64zM523.776 750.08h8.448v8.448h-8.448zM523.776 733.44h8.448v8.448h-8.448zM523.776 716.8h8.448v8.448h-8.448z"
+                        fill="#444444" p-id="1882"></path>
+                </svg>
+            </div>
         </header>
         <main class="main relative" ref="mainRef">
             <slot name='main'></slot>
         </main>
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-item">{{ site.themeConfig.footer.copyright }}</div>
-                <div class="footer-item">{{ site.themeConfig.footer.message }} </div>
-            </div>
-        </footer>
     </div>
 </template>
 
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import { onMounted, ref } from 'vue'
+const { site, frontmatter } = useData()
 
+const headerBtnRef = ref()
 onMounted(() => {
     const VPNavBar = document.querySelector('.VPNavBar')
     if (VPNavBar) {
         VPNavBar.classList.add('.home')
     }
+
+    // 鼠标滚动icon显示隐藏
+    document.addEventListener('scroll', (event) => {
+        if (document.documentElement.scrollTop < 100) {
+            headerBtnRef.value.style.opacity = '1'
+        } else {
+            headerBtnRef.value.style.opacity = '0'
+        }
+    })
 })
-const { site, frontmatter } = useData()
+
+// 滚动到文章列表
 const mainRef = ref()
 const handleClick = () => {
     mainRef.value?.scrollIntoView({ behavior: 'smooth' })
 }
-const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter.value.bgImage : ''
+
+
+// 励志轮播
 const blog = frontmatter.value.blog
 const inspiringTimeout = blog.inspiringTimeout || 10000
 const isShowInspiring = ref(0)
@@ -57,36 +73,16 @@ setInterval(() => {
 
 <style scoped lang="scss">
 .home {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0;
-    margin: 0;
-    box-sizing: content-box;
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    .bg {
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -100;
-    }
+    width: 100%;
 
     .header {
-        width: 100vw;
-        height: 100vh;
-        padding-top: 64px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         position: relative;
-        padding-bottom: 20%;
+        height: 100vh;
+        padding-bottom: 100px;
 
         .logo {
             width: 50px;
@@ -118,37 +114,18 @@ setInterval(() => {
 
         .header-btn {
             position: absolute;
-            bottom: 20px;
-            width: 50px;
-            height: 50px;
+            bottom: 100px;
+
+            .icon {
+                width: 50px;
+                height: 50px;
+            }
         }
     }
 
     .main {
-        width: 100vw;
-        min-height: 100vh;
-        padding-top: 64px;
-    }
-
-    .footer {
-        width: 100vw;
-        height: 80px;
-        background: #f5f5f5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .footer-item {
-                margin: 0 10px;
-                font-size: 12px;
-                font-weight: 400;
-            }
-        }
+        padding-top: 88px;
+        min-height: calc(100vh - 64px);
     }
 }
 </style>
