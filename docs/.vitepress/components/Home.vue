@@ -43,10 +43,12 @@ onMounted(() => {
 
     // 鼠标滚动icon显示隐藏
     document.addEventListener('scroll', (event) => {
+        const btnElement = headerBtnRef?.value;
+        if (!btnElement) return
         if (document.documentElement.scrollTop < 100) {
-            headerBtnRef.value.style.opacity = '1'
+            btnElement.style.opacity = '1'
         } else {
-            headerBtnRef.value.style.opacity = '0'
+            btnElement.style.opacity = '0'
         }
     })
 })

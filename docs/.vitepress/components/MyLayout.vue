@@ -1,14 +1,15 @@
 <script setup>
 import Giscus from "@giscus/vue";
 import DefaultTheme from "vitepress/theme";
-import { onMounted, watch, computed, ref } from "vue";
+import { watch, computed, ref } from "vue";
 import { inBrowser, useData } from "vitepress";
 import { data } from '../theme/post.data'
 import DetailedPostCard from './DetailedPostCard.vue'
 
-
 const { Layout } = DefaultTheme
 const { isDark, page, frontmatter, site } = useData();
+
+// giscus主题跟随博客主题
 watch(isDark, (dark) => {
   if (!inBrowser) return;
 
@@ -22,16 +23,18 @@ watch(isDark, (dark) => {
   );
 });
 
-const posts = computed(() => Object.values(data.postMap))
+// 文章列表
+const posts = computed(() => Object.values(data.postMap).sort((a, b) => b.date.time - a.date.time))
+
 const computedRecentPosts = computed(() =>
   posts.value
     .map(item => ({ ...item, date: item.date.string }))
     .slice((pageNum.value - 1) * pageSize.value, pageNum.value * pageSize.value)
 )
 
+// 分页
 const pageNum = ref(1)
 const pageSize = ref(10)
-
 const handleChange = (currentPageNum, currentPageSize) => {
   pageNum.value = currentPageNum
 }
@@ -76,6 +79,11 @@ const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter
           input-position="top" lang="zh-CN" crossorigin="anonymous" loading="lazy" :theme="isDark ? 'dark' : 'light'" />
       </div>
     </template>
+
+    <!-- prev & next -->
+    <template #aside-outline-before>
+      <BlogPager :posts="posts"></BlogPager>
+    </template>
   </Layout>
 </template>
 <style lang="scss" scoped>
@@ -104,8 +112,6 @@ const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter
     align-items: center;
     width: 100%;
     margin: 20px;
-
-
 
     .el-pagination.is-background>ul.el-pager>li.is-active.number {
       background: var(--sb-thumb-color) !important;

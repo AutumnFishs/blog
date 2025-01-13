@@ -27,7 +27,7 @@ export default defineConfig({
   // 基准路径
   base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/blog", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
   /* 站点标题 */
-  title: "hyj",
+  title: "秋鱼的小破站",
   /* 站点描述 */
   description: "个人博客",
   /* 头部 */
@@ -65,6 +65,7 @@ export default defineConfig({
   /* 默认主题配置 */
   themeConfig: {
     /* 本地搜索 */
+    siteTitle: "hyj",
     search: {
       provider: "local",
       options: {

@@ -52,6 +52,10 @@ const computedYearMap = computed(() => {
                 text-overflow: ellipsis;
             }
 
+            .post-dot {
+                color: var(--vp-c-brand-1);
+            }
+
             .post-dot::before {
                 display: inline-block;
                 content: '';

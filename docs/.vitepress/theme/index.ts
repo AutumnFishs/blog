@@ -14,6 +14,7 @@ import DetailedPostCard from "../components/DetailedPostCard.vue";
 import BlogArchives from "../components/BlogArchives.vue";
 import BlogTags from "../components/BlogTags.vue";
 import BlogGoTop from "../components/BlogGoTop.vue";
+import BlogPager from "../components/BlogPager.vue";
 
 // vue预览组件插件
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
@@ -59,6 +60,7 @@ export default {
     app.component("BlogArchives", BlogArchives);
     app.component("BlogGoTop", BlogGoTop);
     app.component("BlogTags", BlogTags);
+    app.component("BlogPager", BlogPager);
 
     useComponents(app, DemoPreview);
   },

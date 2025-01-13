@@ -1,20 +1,19 @@
 ---
 title: Zustand学习笔记
-date: 2023-03-23 16:00:00
+date: 2025-01-13
 tags: 
   - 前端
   - Zustand
+  - 状态管理工具
 ---
-# react常用的第三方状态管理工具
-
-## Zustand一个轻量级的React状态管理工具
+# Zustand一个轻量级的React状态管理工具
 `Zustand`相比于`redux`，操作更方便，并且整个库也非常小。
 
 中文官网：https://awesomedevin.github.io/zustand-vue/docs/introduce/what-is-zustand
 
 ### 使用步骤
 1. 安装
-:::code-group
+::: info
 ```sh [npm]
 npm i zustand
 ``` 
@@ -278,5 +277,3 @@ const Component = () => {
   ...
 }
 ```
-
-## redux/redux-toolkit
