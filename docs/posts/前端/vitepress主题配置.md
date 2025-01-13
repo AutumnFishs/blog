@@ -1,10 +1,8 @@
 ---
 title: Vitepress主题配置
-date: 2023-04-13 16:32:00
+date: 2024-10-23
 abstract: 使用过程中的一些vitepress的配置项，开始使用的时候多少有些不熟悉，配置习惯后，也就不需要了，主要还是强化记忆吧。
-tags:
-  - Vitepress
-  - 主题配置
+tags: [Vitepress]
 ---
 # 主题配置
 

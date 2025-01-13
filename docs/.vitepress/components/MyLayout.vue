@@ -4,7 +4,8 @@ import DefaultTheme from "vitepress/theme";
 import { watch, computed, ref } from "vue";
 import { inBrowser, useData } from "vitepress";
 import { data } from '../theme/post.data'
-import DetailedPostCard from './DetailedPostCard.vue'
+import BlogPostCard from './BlogPostCard.vue'
+import { Pagination } from 'tdesign-vue-next'
 
 const { Layout } = DefaultTheme
 const { isDark, page, frontmatter, site } = useData();
@@ -35,8 +36,8 @@ const computedRecentPosts = computed(() =>
 // 分页
 const pageNum = ref(1)
 const pageSize = ref(10)
-const handleChange = (currentPageNum, currentPageSize) => {
-  pageNum.value = currentPageNum
+const handleChange = (pageInfo) => {
+  pageNum.value = pageInfo.current
 }
 
 // 背景图
@@ -54,12 +55,15 @@ const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter
         }"></div>
         <template #main>
           <div class="main">
-            <DetailedPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
+            <BlogPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
               :title="article.title" :abstract="article.abstract" :date="article.date" :tags="article.tags" />
             <div class="main-pagination">
-              <el-pagination size="small" background layout="prev, pager, next" @next-click="handleChange"
+              <Pagination v-model:pageSize="pageSize" :total="posts.length" size="small" @change="handleChange"
+                :totalContent='false' :showPageSize="false" />
+              <!--  -->
+              <!-- <el-pagination size="small" background layout="prev, pager, next" @next-click="handleChange"
                 :hide-on-single-page="true" @prev-click="handleChange" @change="handleChange" :total="posts.length"
-                class="mt-4" />
+                class="mt-4" /> -->
             </div>
           </div>
         </template>
@@ -83,6 +87,11 @@ const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter
     <!-- prev & next -->
     <template #aside-outline-before>
       <BlogPager :posts="posts"></BlogPager>
+    </template>
+
+    <!-- doc bottom -->
+    <template #doc-bottom>
+      <BlogImageViewer />
     </template>
   </Layout>
 </template>

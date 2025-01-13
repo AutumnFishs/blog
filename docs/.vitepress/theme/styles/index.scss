@@ -112,9 +112,9 @@
   font-family: 'YangRenDongZhuShiTi-Light';
 }
 
-// element ui 主题色
+// t design 主题色
 :root {
-  --el-color-primary: #6b73afff;
+  --td-brand-color: #6b73afff;
 }
 
 // 滚动条样式
@@ -165,15 +165,6 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-}
-
-// 图片点击放大层级
-.medium-zoom-overlay {
-  z-index: 20;
-}
-
-.medium-zoom-image {
-  z-index: 9999;
 }
 
 // 毛玻璃效果
@@ -242,16 +233,5 @@
 
 // 文章导航目录标题
 #doc-outline-aria-label {
-  font-size: 24px;
-}
-
-.vp-doc {
-
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--vp-c-brand-1);
-  }
+  font-size: 18px;
 }

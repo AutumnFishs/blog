@@ -1,7 +1,7 @@
 ---
-title: ts类型工具的练习
-date: 2023-03-22 15:16:00
-tags: [ts]
+title: Ts类型工具的练习
+date: 2024-10-09
+tags: [Typescript]
 ---
 # ts 类型练习笔记
 

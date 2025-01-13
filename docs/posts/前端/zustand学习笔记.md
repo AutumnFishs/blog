@@ -1,10 +1,8 @@
 ---
 title: Zustand学习笔记
-date: 2025-01-13
-tags: 
-  - 前端
-  - Zustand
-  - 状态管理工具
+date: 2024-10-09
+abstract: Zustand一个 基于 Flux 模型实现的小型、快速和可扩展的状态管理解决方案，相比于redux的繁琐，操作更方便，并且整个库也非常小。当然，它不仅仅只支持React，也支持vue等...
+tags: [Zustand,状态管理工具]
 ---
 # Zustand一个轻量级的React状态管理工具
 `Zustand`相比于`redux`，操作更方便，并且整个库也非常小。

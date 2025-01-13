@@ -1,13 +1,10 @@
 ---
-title: react中实现动态路由的配置
-date: 2023-07-14 14:25:00
-tags: [react, react-router-dom]
+title: React+Vite动态路由实现
+date: 2024-10-24
+abstract: 最近项目迭代提出一个需求，通过菜单授权动态生产路由；然后这个项目是vite+react18+react-router-dom6的，在实现过程中遇到了一些问题，记录一下。
+tags: [React]
 ---
-# 关于 react 中实现动态路由的配置
-
-## 前言
-
-最近一个迭代提出一个需求，通过菜单授权动态生产路由；然后这个项目是vite+react18+react-router-dom6的，在实现过程中遇到了一些问题，记录一下。
+# React+Vite动态路由实现
 
 ## 项目配置
 

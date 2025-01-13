@@ -1,9 +1,10 @@
 ---
 title: 在react中使用pdfjs的一个demo
-date: 2023-04-10 15:25:00
-tags: [react, pdfjs]
+abstract: 之前有个迭代需求，需要保证文件的安全性，所以不可以直接将文件链接暴露出来且需要实现弹框展示自定义样式，最终这里使用使用第三方插件 pdfjs-dist 来实现预览功能，这里记录下实现思路和代码
+date: 2024-10-31
+tags: [React]
 ---
-# Demos
+# 在react中使用pdfjs的一个demo
 1. 如何实现预览 PDF 文件
 
 - 浏览器自带的 PDF 预览

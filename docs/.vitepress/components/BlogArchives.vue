@@ -1,9 +1,7 @@
 <script setup>
-import { useData } from 'vitepress'
+import { withBase } from 'vitepress'
 import { computed } from 'vue'
 import { data } from '../theme/post.data'
-const { site } = useData()
-const base = site.value.base.slice(0, -1)
 
 const { yearMap, postMap } = data
 const yearList = Object.keys(yearMap).sort((a, b) => b - a); // 按年份降序排序
@@ -20,7 +18,7 @@ const computedYearMap = computed(() => {
         <div class="list" v-for="year in yearList" :key="year">
             <div class="year" v-text="year"></div>
             <div class="post-list" v-for="(article, index2) in computedYearMap[year]" :key="index2">
-                <a class="post-dot" v-text="article.title" :href="base + article.url">
+                <a class="post-dot" v-text="article.title" :href="withBase(article.url)">
                 </a>
                 <div class="desc" v-text="article.date.string">
                 </div>

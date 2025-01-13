@@ -1,11 +1,9 @@
 ---
-title: css样式
-date: 2021-08-24
-tags:
- - css
-hidden: true
+title: Css样式学习笔记
+date: 2024-10-09
+tags: [Css]
 ---
-# 平时用到的CSS样式块
+# Css样式学习笔记
 
 1. 单行文本溢出隐藏省略号
 ```css

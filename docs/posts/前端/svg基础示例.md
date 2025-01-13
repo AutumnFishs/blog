@@ -1,8 +1,7 @@
 ---
 title: Svg 矢量图练习
-date: 2021-11-01 15:00:00
-tags: 
-  - svg
+date: 2024-10-09
+tags: [Svg]
 ---
 # Svg 矢量图练习
 

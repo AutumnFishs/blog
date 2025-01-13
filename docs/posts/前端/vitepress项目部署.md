@@ -1,9 +1,8 @@
 ---
-title: vitePress项目部署
-date: 2023-04-11 10:54:00
+title: VitePress项目部署
+date: 2024-10-23
 abstract: 记录一下博客部署的过程，这里暂时使用vercel和github page两种方式，docker部署当时没想起来记录，以后再补上
-tags:
-  - vitepress
+tags: [Vitepress]
 ---
 # 关于 vitePress 的部署
 ## vercel简单部署

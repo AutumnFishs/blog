@@ -7,7 +7,7 @@ interface Post {
     time: number;
     string: string;
   };
-  abstract?: string;
+  abstract?: string[];
 }
 
 interface RencentPost extends Post {

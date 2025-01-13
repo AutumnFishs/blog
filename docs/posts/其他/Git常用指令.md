@@ -1,7 +1,7 @@
 ---
-title: git常用指令
-date: 2022-06-08 16:52:00
-tags: [git]
+title: Git常用指令
+date: 2024-10-13
+tags: [Git]
 ---
 # git指令
 

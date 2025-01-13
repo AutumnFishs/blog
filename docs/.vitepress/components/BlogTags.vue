@@ -9,7 +9,7 @@
         <p v-text="currentTag" class="current-tag"></p>
         <ul>
             <li v-for="(article, index) in postList" :key="index" class="card">
-                <a v-text="article.title" :href="base + article.url" class="post-dot">
+                <a v-text="article.title" :href="withBase(article.url)" class="post-dot">
                 </a>
                 <div v-text="article.date.string" class="post-date">
                 </div>
@@ -22,9 +22,7 @@
 <script setup>
 import { ref, unref, computed, onMounted } from 'vue'
 import { data } from '../theme/post.data'
-import { useData } from 'vitepress'
-const { site } = useData()
-const base = site.value.base.slice(0, -1)
+import { withBase } from 'vitepress'
 
 const { tagMap, postMap } = data
 const tags = Object.keys(tagMap)

@@ -1,9 +1,7 @@
 ---
-title: react组件demo
-date: 2023-03-27 17:00:00
-tags: 
-  - react
-  - 组件
+title: React组件demo
+date: 2024-10-09
+tags: [React]
 ---
 # react项目中常用一些封装组件、自定义Hooks
 ## 封装的一些组件

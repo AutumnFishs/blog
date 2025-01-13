@@ -1,9 +1,10 @@
 ---
-title: vue学习笔记
-date: 2022-12-12
-tags:
-  - 前端
-  - vue
+title: Vue学习笔记
+date: 2024-10-09
+abstract: 
+  - vue3初期学习过程可以使用setup函数，作为过渡它依旧提供了vue2的选项式写法，比如`data`、`methods`、生命周期等，但是vue3更推荐使用setup语法糖加上组合式API，这样代码更简洁，可读性更高，并且更符合函数式编程思想。
+  - 组合式api可以实现像react hooks一样的功能，并且vue提供的api更加的细致，在满足日常开发的需要的同时，也提供了更多的组合性。
+tags: [Vue]
 ---
 
 # Vue 官方文档阅读笔记

@@ -1,23 +1,20 @@
 <template>
     <div class="pager-link">
-        <div class="prev" @click="handlePrev" v-if="findIndex > 0">
-            <el-icon>
-                <DArrowLeft />
-            </el-icon>
-            <span>{{ pager?.prev || 'Prev page' }}</span>
+        <div class="prev" @click="handlePrev">
+            <ChevronLeftDoubleIcon />
+            <span>{{ findIndex > 0 ? (pager?.prev || 'Prev page') : '到顶了' }}</span>
         </div>
-        <div class="next" @click="handleNext" v-if="findIndex < props.posts.length - 1">
-            <span>{{ pager?.next || 'Next page' }}</span>
-            <el-icon>
-                <DArrowRight />
-            </el-icon>
+        <div class="next" @click="handleNext">
+            <span>{{ findIndex < props.posts.length - 1 ? (pager?.next || 'Next page') : '到底了' }}</span>
+                    <ChevronRightDoubleIcon />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { useData } from 'vitepress';
-import { DArrowLeft, DArrowRight } from '@element-plus/icons-vue'
+import { useData, withBase } from 'vitepress';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from 'tdesign-icons-vue-next'
 import { useRouter } from 'vitepress';
 import { ref, watch } from 'vue';
 const props = defineProps({
@@ -28,7 +25,6 @@ const props = defineProps({
 });
 
 const { site } = useData();
-const base = site.value.base.slice(0, -1);
 const { route, go } = useRouter();
 const findIndex = ref(0)
 
@@ -42,14 +38,18 @@ const pager = site.value.themeConfig.docFooter
 // 上一页
 const handlePrev = () => {
     if (findIndex.value > 0) {
-        go(base + props.posts[findIndex.value - 1].url)
+        go(withBase(props.posts[findIndex.value - 1].url || ''))
+    } else {
+        MessagePlugin.warning('到顶了');
     }
 }
 
 // 下一页
 const handleNext = () => {
     if (findIndex.value < props.posts.length - 1) {
-        go(base + props.posts[findIndex.value + 1].url)
+        go(withBase(props.posts[findIndex.value + 1].url || ''))
+    } else {
+        MessagePlugin.warning('到底了');
     }
 }
 </script>

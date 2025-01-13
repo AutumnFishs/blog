@@ -1,11 +1,12 @@
 ---
-title: 记录一下项目中用到的nginx配置
-date: 2024-6-02
+title: Nginx学习笔记
+date: 2025-01-13
 abstract: 
-tags:
-- CSS
+    - 在学习背景方面，由于之前遇到页面无法正常显示的问题，公司运维团队检查配置后反馈是前端代码存在缺陷。领导也认为我在前端技术上的掌握还不够深入，未能透彻理解相关概念。面对这种情况，内心确实感到无奈;
+    - 为了更好地解决问题，我决定去了解一下Nginx的相关配置。考虑到日常工作中接触Nginx的机会不多,为了便于日后复习和查阅，决定还是写一下笔记记录一下。
+tags: [Nginx]
 ---
-# nginx配置
+# Nginx学习笔记
 
 ## nginx常用
 
@@ -14,7 +15,7 @@ tags:
 
 ### 负载均衡
 nginx将请求按权重判断分发到多个后端服务器，实现负载均衡,比如下面配置：
-``` conf
+``` txt
 upstream backend {
     server backend1.example.com weight=5;
     server backend2.example.com weight=3;
@@ -24,7 +25,7 @@ upstream backend {
 
 ### web缓存
 Nginx 支持 HTTP 响应的缓存，可以显著减少对外部服务器的请求次数，从而提高性能。配置如下：
-``` conf
+``` txt
 http {
     # proxy_cache_path 用于定义缓存区域的位置和配置参数
     # path 表示根目录
@@ -79,7 +80,7 @@ http {
 :::
 
 ### nginx配置文件结构
-```
+```txt
 ... #全局块 : 配置影响nginx全局的指令。一般有运行nginx服务器的用户组，nginx进程pid存放路径，日志存放路径，配置文件引入，允许生成的worker process数等。
 events { #events块 ：配置影响nginx服务器或与用户的网络连接。有每个进程的最大连接数，选取哪种事件驱动模型处理连接请求，是否允许同时接受多个网路连接,是否开启多个网络连接序列化等。
    ...
@@ -101,11 +102,8 @@ http { #http块 : 可以嵌套多个server，配置代理，缓存，日志定�
     ... #http全局块
 }
 ```
-
-### nginx配置文件示例
-
-```
-nginx.conf
+::: info nginx配置文件示例
+```txt
 # 在http区域内一定要添加下面配置, 支持websocket
 # 这里是创建一个映射，当客户端发起请求的时候会把$http_upgrade的值设置为$connection_upgrade的值
 # 这里表示 设置 变量$connection_upgrade的值为 $http_upgrade,并且当 $http_upgrade为 "" 时，
@@ -274,7 +272,6 @@ server {
     }
 }
 ```
-
-::: tip
-当前笔记，主要参考[菜鸟教程-Nginx配置详解](https://www.runoob.com/w3cnote/nginx-setup-intro.html)以及**项目的部分配置
 :::
+
+当前笔记，主要参考[菜鸟教程-Nginx配置详解](https://www.runoob.com/w3cnote/nginx-setup-intro.html)以及**项目的部分配置

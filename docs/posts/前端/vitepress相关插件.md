@@ -1,13 +1,10 @@
 ---
-title: vitepress相关插件
-date: 2023-05-25 14:47:52
+title: Vitepress相关插件
+date: 2024-10-09
 abstract: 记录了一些之前使用过的vitepress插件，方便以后查阅。
-tags: 
-   - vitepress
-recommend: 4
+tags: [Vitepress]
 ---
-
-# 关于 vitePress 中用到的一些组件
+# Vitepress相关插件
 
 ## 插件部分
 
