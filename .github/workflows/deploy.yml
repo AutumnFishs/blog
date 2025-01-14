@@ -46,12 +46,13 @@ jobs:
       - name: 设置 GitHub Pages 的环境
         uses: actions/configure-pages@v4
       - name: 安装项目依赖
-      # 运行命令行指令，这里使用npm ci表示的是check install,比传统的npm install更快
+        # 运行命令行指令，这里使用npm ci表示的是check install,比传统的npm install更快
         run: pnpm install # 或 pnpm install / yarn install / bun install
       - name: 打包 vitePress
         # 运行vitePress中的构建指令
         run: pnpm docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
         # 将构建好的包上传为流水线的工件（artifact）
+        timeout-minutes: 1 # 设置此步骤的超时时间为1分钟
       - name: 上传 artifact
         uses: actions/upload-pages-artifact@v3
         with:
