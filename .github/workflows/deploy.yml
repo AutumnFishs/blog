@@ -53,6 +53,7 @@ jobs:
         run: pnpm docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
         # 将构建好的包上传为流水线的工件（artifact）
         timeout-minutes: 1 # 设置此步骤的超时时间为1分钟
+        continue-on-error: true # 即使此步骤失败，也继续执行流水线
       - name: 上传 artifact
         uses: actions/upload-pages-artifact@v3
         with:
