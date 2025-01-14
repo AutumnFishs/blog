@@ -90,7 +90,10 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
-// 自定义字体
+
+/**
+   * 字体
+   * -------------------------------------------------------------------------- */
 // HongLeiBanShuJianTi
 @font-face {
   font-family: 'HongLeiBanShuJianTi';
@@ -107,17 +110,26 @@
     url('/font/YangRenDongZhuShiTi-Light-2.ttf') format('truetype');
 }
 
-// 全局字体
 * {
   font-family: 'YangRenDongZhuShiTi-Light';
 }
 
-// t design 主题色
+// logo字体
+.VPNav .VPNavBarTitle>a>span {
+  font-family: 'HongLeiBanShuJianTi', sans-serif !important;
+  font-size: 20px;
+}
+
+/**
+   * TDesign Theme 
+   * -------------------------------------------------------------------------- */
 :root {
   --td-brand-color: #6b73afff;
 }
 
-// 滚动条样式
+/**
+   * Slider
+   * -------------------------------------------------------------------------- */
 :root {
   --sb-track-color: #f5f5f5ff;
   --sb-thumb-color: #6b73afff;
@@ -126,67 +138,22 @@
   --sb-height: 6px;
 }
 
-.VPImage.image-src {
-  width: 320px;
-  height: 320px;
-  object-fit: cover;
-  border-radius: 160px;
-}
-
-
-.VPHero {
-  .image-bg {
-    opacity: 0.8;
-    transition: opacity 1s ease;
-  }
-
-  .image-container:hover .image-bg {
-    opacity: 0.4;
-  }
-}
-
-.VPButton.medium.brand {
-  background-color: var(--vp-c-brand-2);
-}
-
-.VPButton.medium.brand:hover {
-  opacity: 0.9;
-}
-
-.VPLink.link.vp-external-link-icon.no-icon.VPFeature:hover {
-  border: 1px solid var(--vp-c-brand-2);
-}
-
-.VPLink.link.vp-external-link-icon.no-icon.VPFeature.link-text-value {
-  color: var(--vp-c-brand-2);
-}
-
-.VPImage.logo {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-}
-
-// 毛玻璃效果
-@import './blur.scss';
-
-
-*::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: var(--sb-width);
   height: var(--sb-height);
 }
 
-*::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--sb-track-color);
   border-radius: 6px;
 }
 
-*::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 6px;
 }
 
-*::-webkit-scrollbar-corner {
+::-webkit-scrollbar-corner {
   background: var(--sb-corner-color);
 }
 
@@ -204,34 +171,114 @@
   /* 鼠标悬停时的颜色 */
 }
 
-/* 主页背景 */
-.VPHome {
+/**
+   * Navbar 毛玻璃效果
+   * -------------------------------------------------------------------------- */
+:root {
 
-  // 自定义首页背景图
-  &::before {
-    // 图片来源：https://zhuanlan.zhihu.com/p/54060187
-    background-image: url(./bg.jpg);
-    background-size: cover;
+  /* 首页导航 */
+  .VPNavBar {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
   }
 
-  // 定义遮罩样式
-  background: radial-gradient(ellipse,
-    rgba(var(--bg-gradient-home), 1) 0%,
-    rgba(var(--bg-gradient-home), 0) 150%);
+  /* 文档页导航两侧 */
+  .VPNavBar:not(.home) {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+  }
+
+  @media (min-width: 960px) {
+
+    /* 文档页导航两侧 */
+    .VPNavBar:not(.home) {
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(10px);
+    }
+
+    /* 首页下滑后导航两侧 */
+    .VPNavBar:not(.has-sidebar):not(.home.top) {
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  @media (min-width: 960px) {
+
+    /* 文档页导航中间 */
+    .VPNavBar:not(.home.top) .content-body {
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(10px);
+    }
+
+    /* 首页下滑后导航中间 */
+    .VPNavBar:not(.has-sidebar):not(.home.top) .content-body {
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+
+  /* 分割线 */
+
+  @media (min-width: 960px) {
+
+    /* 文档页分割线 */
+    .VPNavBar:not(.home.top) .divider-line {
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(10px);
+    }
+
+    /* 首页分割线 */
+    .VPNavBar:not(.has-sidebar):not(.home.top) .divider {
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  /* 搜索框 VPNavBarSearchButton.vue */
+  .DocSearch-Button {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+  }
+
+
+  /* 移动端大纲栏 */
+  .VPLocalNav {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+    /* 隐藏分割线 */
+    /* border-bottom: 5px solid var(--vp-c-gutter); */
+    border-bottom: 0px;
+  }
 }
 
-.VPNav .VPNavBarTitle>a>span {
-  font-family: 'HongLeiBanShuJianTi', sans-serif !important;
-  font-size: 20px;
-}
-
-
+/* 首页隐藏 */
 .Layout>#VPContent.VPContent.is-home>.VPHome {
   display: none !important;
 }
 
-
 // 文章导航目录标题
 #doc-outline-aria-label {
   font-size: 18px;
+}
+
+/**
+   * VPDoc 容器最大宽度
+   * -------------------------------------------------------------------------- */
+:root {
+  --vp-layout-max-width: 1200px;
+}
+
+.VPDoc {
+
+  /* 修改 layout 最大宽度 */
+  .container {
+    max-width: var(--vp-layout-max-width) !important;
+  }
+
+  .content-container,
+  .content {
+    max-width: 960px !important;
+  }
 }

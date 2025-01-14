@@ -19,11 +19,11 @@ interface data {
   recentPosts: RencentPost[];
   postMap: unknown;
   tagMap: unknown;
+  sidebarMap: unknown;
 }
 
-declare const data: Post[];
+declare const data;
 export { data };
-
 
 // 将日期格式化为 {time: number, string: string} 类型
 function formatDate(raw: string): Post["date"] {
@@ -45,6 +45,8 @@ export default createContentLoader("posts/*/*.md", {
     const yearMap = {};
     // 标签数据映射
     const tagMap = {};
+    // 侧边栏数据
+    const sidebarMap = {};
 
     const posts = raw
       .map(({ url, frontmatter }) => {
@@ -59,12 +61,17 @@ export default createContentLoader("posts/*/*.md", {
           abstract: frontmatter.abstract,
           tags,
         };
+        const key = url.split("/")[2];
+        if (!sidebarMap[key]) {
+          sidebarMap[key] = [result];
+        } else {
+          sidebarMap[key].push(result);
+        }
         postMap[result.url] = result;
         return result;
       })
       .sort((a, b) => b.date.time - a.date.time);
 
-    
     const recentPosts = posts.slice(0, 10).map((item) => ({ ...item }));
 
     posts.forEach((item) => {
@@ -87,6 +94,7 @@ export default createContentLoader("posts/*/*.md", {
       recentPosts,
       postMap,
       tagMap,
+      sidebarMap,
     };
   },
 });

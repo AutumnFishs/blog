@@ -1,5 +1,5 @@
 <template>
-    <div class="pager-link">
+    <div class="pager-link" v-if="!frontmatter.layoutClass">
         <div class="prev" @click="handlePrev">
             <ChevronLeftDoubleIcon />
             <span>{{ findIndex > 0 ? (pager?.prev || 'Prev page') : '到顶了' }}</span>
@@ -12,10 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { useData, withBase } from 'vitepress';
+import { useData, withBase, useRouter } from 'vitepress';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from 'tdesign-icons-vue-next'
-import { useRouter } from 'vitepress';
 import { ref, watch } from 'vue';
 const props = defineProps({
     posts: {
@@ -24,7 +23,7 @@ const props = defineProps({
     }
 });
 
-const { site } = useData();
+const { site, frontmatter } = useData();
 const { route, go } = useRouter();
 const findIndex = ref(0)
 

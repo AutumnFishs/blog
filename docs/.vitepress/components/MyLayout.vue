@@ -39,9 +39,6 @@ const pageSize = ref(10)
 const handleChange = (pageInfo) => {
   pageNum.value = pageInfo.current
 }
-
-// 背景图
-const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter.value.bgImage : ''
 </script>
 
 <template>
@@ -49,10 +46,6 @@ const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter
     <!-- home -->
     <template #layout-top>
       <home v-if="frontmatter.layout === 'home'">
-        <div :class="`bg bg-[url(${bg})]`" :style="{
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }"></div>
         <template #main>
           <div class="main">
             <BlogPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
@@ -60,10 +53,6 @@ const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter
             <div class="main-pagination">
               <Pagination v-model:pageSize="pageSize" :total="posts.length" size="small" @change="handleChange"
                 :totalContent='false' :showPageSize="false" />
-              <!--  -->
-              <!-- <el-pagination size="small" background layout="prev, pager, next" @next-click="handleChange"
-                :hide-on-single-page="true" @prev-click="handleChange" @change="handleChange" :total="posts.length"
-                class="mt-4" /> -->
             </div>
           </div>
         </template>
@@ -77,36 +66,26 @@ const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter
 
     <!-- giscus评论 -->
     <template #doc-after>
-      <div class="mt-[24px]">
-        <Giscus :key="page.filePath" repo="AutumnFishs/blog" repo-id="R_kgDOM9s-0A" category="Announcements"
-          category-id="DIC_kwDOM9s-0M4CjVeh" mapping="pathname" strict="0" reactions-enabled="1" emit-metadata="0"
-          input-position="top" lang="zh-CN" crossorigin="anonymous" loading="lazy" :theme="isDark ? 'dark' : 'light'" />
-      </div>
+      <Giscus :key="page.filePath" repo="AutumnFishs/blog" repo-id="R_kgDOM9s-0A" category="Announcements"
+        category-id="DIC_kwDOM9s-0M4CjVeh" mapping="pathname" strict="0" reactions-enabled="1" emit-metadata="0"
+        input-position="top" lang="zh-CN" crossorigin="anonymous" loading="lazy" :theme="isDark ? 'dark' : 'light'" />
     </template>
 
     <!-- prev & next -->
     <template #aside-outline-before>
       <BlogPager :posts="posts"></BlogPager>
     </template>
-
     <!-- doc bottom -->
     <template #doc-bottom>
       <BlogImageViewer />
     </template>
+    <!-- doc top -->
+    <template #doc-top>
+      <BlogSidebar />
+    </template>
   </Layout>
 </template>
 <style lang="scss" scoped>
-.bg {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  overflow: hidden;
-
-}
-
 .main {
   max-width: 1024px;
   width: 100%;
@@ -121,10 +100,6 @@ const bg = frontmatter.value.bgImage ? site.value.base + 'public/' + frontmatter
     align-items: center;
     width: 100%;
     margin: 20px;
-
-    .el-pagination.is-background>ul.el-pager>li.is-active.number {
-      background: var(--sb-thumb-color) !important;
-    }
   }
 }
 </style>

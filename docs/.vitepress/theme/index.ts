@@ -13,6 +13,7 @@ import BlogTags from "../components/BlogTags.vue";
 import BlogGoTop from "../components/BlogGoTop.vue";
 import BlogPager from "../components/BlogPager.vue";
 import BlogImageViewer from "../components/BlogImageViewer.vue";
+import BlogSidebar from "../components/BlogSidebar.vue";
 
 // vue预览组件插件
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
@@ -28,7 +29,6 @@ import "virtual:group-icons.css";
 import "tdesign-vue-next/es/style/index.css";
 
 // 主题配置
-import "./styles/tailwind.css";
 import "./styles/index.scss";
 
 export default {
@@ -59,6 +59,7 @@ export default {
     app.component("BlogTags", BlogTags);
     app.component("BlogPager", BlogPager);
     app.component("BlogImageViewer", BlogImageViewer);
+    app.component("BlogSidebar", BlogSidebar);
 
     useComponents(app, DemoPreview);
   },

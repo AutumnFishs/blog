@@ -1,8 +1,7 @@
 ---
-title: linux
-date: 2020-12-08
-tags:
- - 信息
+title: Linux学习笔记
+date: 2024-08-01
+tags: [Linux]
 ---
 # linux
 
