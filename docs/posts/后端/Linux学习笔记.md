@@ -3,7 +3,7 @@ title: Linux学习笔记
 date: 2024-08-01
 tags: [Linux]
 ---
-# linux
+# Linux学习笔记
 
 ## linux 资源目录
 

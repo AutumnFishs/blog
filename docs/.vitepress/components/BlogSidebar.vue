@@ -10,8 +10,8 @@
                 </div>
                 <div class="sub-item-list" v-show="item.subFlag">
                     <div class="item" v-for="subItem in item.subList" :key="subItem.url">
-                        <a class="item-link" :href="withBase(subItem.url)">{{
-                            subItem.title }}</a>
+                        <a :class="`item-link ${withBase(subItem.url) === decodeURIComponent(route.path) ? 'is-active' : ''}`"
+                            :href="withBase(subItem.url)">{{ subItem.title }}</a>
                     </div>
                 </div>
             </div>
@@ -58,8 +58,6 @@ const handleIsFlag = (subTitle: string) => {
         item.subFlag = !item.subFlag
     }
 }
-
-
 </script>
 
 <style scoped lang="scss">
@@ -129,9 +127,13 @@ const handleIsFlag = (subTitle: string) => {
                     max-width: 200px;
                 }
 
+                .is-active {
+                    color: var(--vp-c-brand);
+                    cursor: pointer;
+                }
+
                 .item-link:hover {
                     color: var(--vp-c-brand);
-                    text-decoration: underline;
                     cursor: pointer;
                 }
             }
