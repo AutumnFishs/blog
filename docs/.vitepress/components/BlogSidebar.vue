@@ -73,7 +73,7 @@ const handleIsFlag = (subTitle: string) => {
     top: 0;
     left: 0;
     width: 220px;
-    height: 100%;
+    height: calc(100vh - 64px);
     padding: 20px 10px;
     box-sizing: border-box;
     background: rgba(0, 0, 0, 0);

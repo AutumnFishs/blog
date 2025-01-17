@@ -7,9 +7,186 @@ abstract:
 tags: [Vue]
 ---
 
-# Vue 官方文档阅读笔记
+# Vue3学习笔记
 vue3初期学习过程可以使用setup函数，作为过渡它依旧提供了vue2的选项式写法，比如`data`、`methods`、生命周期等，但是vue3更推荐使用setup语法糖加上组合式API，这样代码更简洁，可读性更高，并且更符合函数式编程思想。
 组合式api可以实现像react hooks一样的功能，并且vue提供的api更加的细致，在满足日常开发的需要的同时，也提供了更多的组合性。
+
+## 快速上手（只记录了v3新特性，其他的和v2一样）
+
+### 生命周期
+vue3的生命周期和vue2基本一样，需要注意是v3销毁期的名字换为了unmounted 和 beforeunmount；以下是v3生命周期钩子
+1. `onBeforeCreate`：创建实例之前调用
+2. `onCreated`：实例创建完成调用
+3. `onBeforeMount`：实例挂载前调用
+4. `onMounted`：实例挂载完成调用，这时可以操作dom了
+5. `onBeforeUpdate`：更新视图前调用
+6. `onUpdated`：更新完成调用
+7. `onBeforeUnmount`：销毁实例前调用，可以清除定时器、事件等
+8. `onUnmounted`：销毁实例完成调用
+9. `onErrorCaptured`：子孙组件发生错误调用
+11. `onActivated`：keep-alive的生命周期，激活缓存的组件时调用，可以做挂载前的一些操作
+12. `onDeactivated`：keep-alive的生命周期，组件失活时调用，可以做一些销毁前的操作
+13. `onServerPrefetch`：服务端渲染之前调用
+
+### 基本语法（对标选项式的一些组合式API）
+1. data 
+   - `ref`(任意类型数据) 调用时需要.value，还可以用来获取dom元素，v3.5后推荐使用`useTempleRef`取获取元素配置子组件`defineExpose`()暴露方法或者状态给父组件，这一点类似于react中的`useImperativeHandle`
+   - `reactive`(对象)
+   - `shallowRef`(任意类型数据) 调用时需要.value，不同的是，只有第一层数据是响应式的，不会递归到深层次的响应式
+2. methods：直接在script标签内写函数方法即可
+3. computed：计算属性值会基于其响应式依赖被缓存
+   - computed(()=>{ return xxx})
+4. watch
+   - watch()
+   ::: info 示例
+   ``` js
+   const a = ref('')
+   watch(a,async (newVal,oldVal)=>{
+    if(newVal === 'xxx') return
+    const xxx = await axios()
+    onWatcherCleanup(() => {
+      //清理逻辑
+    })
+   })
+
+   // 监听多个数据
+   watch([a,()=>b.value],([newa,newb],[olda,oldb])=>{
+    // flush: 'post' 确保可以获取更新后的dom
+    // flush: 'sync' 响应式数据更新前触发
+   }, { deep: true,immediate: true，flush: 'post'  })
+   ```
+   :::    
+   - watchEffect()
+   ::: info 示例
+   ``` js
+    const unwatch = watchEffect(()=>{
+    // 依赖的值发生变化，就会重新执行这个函数
+    // 不需要手动传入依赖，会自动收集依赖
+    // 并且本身就是深度监听，且开始就会执行相当于默认{ deep: true,immediate: true  }
+     onCleanup(() => {
+    // 清理逻辑
+    })
+   }，{flush: 'post'}) 
+   //等价于 watchPostEffect(()=>{})
+   // 当值为sync的时候也有一个等价的监听器 watchSyncEffect()
+
+   unwatch() //停止监听回调
+   ```
+   ::: 
+5. filters：v3弃用
+6. minxins：v3不再推荐使用，并且也不需要了，可以直接写组合式api，封装类似react hook 的方式
+7. props：
+   - 宏 definProps({})
+8. 指令使用：指令：事件.修饰符=方法
+   - v-module除了双向绑定，v3还可以实现父子通信
+   ::: info 示例
+   ``` html
+    <!-- Parent.vue -->
+    <Child v-model="countModel" />
+    <!-- 等价于 -->
+    <Child
+      :modelValue="countModel"
+      @update:modelValue="$event => (countModel = $event)"
+    />
+
+    <!-- 3.4版本以后的写法 -->
+    <!-- Child.vue -->
+    <script setup>
+    const model = defineModel()
+
+    function update() {
+      model.value++
+    }
+    </script>
+
+    <template>
+      <div>Parent bound v-model is: {{ model }}</div>
+      <button @click="update">Increment</button>
+    </template>
+
+    <!-- 3.4之前的写法 -->
+    <!-- Child.vue -->
+    <script setup>
+    const props = defineProps(['modelValue'])
+    const emit = defineEmits(['update:modelValue'])
+    </script>
+
+    <template>
+      <input
+        :value="props.modelValue"
+        @input="emit('update:modelValue', $event.target.value)"
+      />
+    </template>
+
+    <MyComponent v-model:title="bookTitle" />
+    <!-- MyComponent.vue -->
+    <script setup>
+      // required表示当前项必填，default表示默认值（需要注意的是默认值必须保持和父组件里面同步）
+    const title = defineModel('title'，{required:true,default:0})
+    </script>
+
+    <template>
+      <input type="text" v-model="title" />
+    </template>
+    
+   ```
+   :::
+8. 依赖注入
+   ::: info 示例
+   ``` js
+    const location = ref('North Pole')
+
+    function updateLocation() {
+      location.value = 'South Pole'
+    }
+
+    provide('location', {
+      location,
+      updateLocation
+    })
+
+    // 在需要的后代组件中
+    const { location, updateLocation } = inject('location')
+   ```
+   :::
+
+9. 异步组件 ：defineAsyncComponent，类型于react中Suspense + lazy实现的懒加载效果，只在需要时加载该组件
+    ::: info 示例
+    ```js
+    import { defineAsyncComponent } from 'vue'
+
+    const AsyncComp = defineAsyncComponent(() =>
+      import('./components/MyComponent.vue')
+    )
+
+    //高级配置
+    const AsyncComp = defineAsyncComponent({
+      // 加载函数
+      loader: () => import('./Foo.vue'),
+
+      // 加载异步组件时使用的组件
+      loadingComponent: LoadingComponent,
+      // 展示加载组件前的延迟时间，默认为 200ms
+      delay: 200,
+
+      // 加载失败后展示的组件
+      errorComponent: ErrorComponent,
+      // 如果提供了一个 timeout 时间限制，并超时了
+      // 也会显示这里配置的报错组件，默认值是：Infinity
+      timeout: 3000
+    })
+    ```
+    :::
+
+### 内置组件
+1. Teleport是v3新增的组件，像一个传送门，可以将当前的dom传递到指定html的指定位置，比如一个全局弹框，直接传送到body标签、或者写一个右键菜单栏啥的
+2. suspense实验性功能...
+
+### 组件通信
+- 依赖注入：provide,inject
+- 父子通信：props,emit ，v3除了像以前一样使用这个，还可以通过v-model实现
+- 使用插件pinia
+
 ## 关于 Vue3 的一些 API
 
 ### 应用实例 API
@@ -486,11 +663,3 @@ shallow.value.greet = 'Hello, universe'
 triggerRef(shallow)
 ```
 :::
-
-### 生命周期
-
-### 内置组件
-
-### 指令
-
-### 
