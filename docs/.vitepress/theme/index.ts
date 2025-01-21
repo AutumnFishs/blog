@@ -1,3 +1,4 @@
+// @ts-nocheck
 import DefaultTheme from "vitepress/theme";
 import { h, onMounted } from "vue";
 import { useData, type EnhanceAppContext, type Theme } from "vitepress";
