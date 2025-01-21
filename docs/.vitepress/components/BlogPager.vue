@@ -14,7 +14,6 @@
 <script setup lang="ts">
 import { useData, withBase, useRouter } from 'vitepress';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from 'tdesign-icons-vue-next'
 import { ref, watch } from 'vue';
 const props = defineProps({
     posts: {

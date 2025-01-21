@@ -81,27 +81,14 @@ const handleChange = (pageInfo) => {
 
     <!-- giscus评论 -->
     <template #doc-after>
-      <Giscus
-        :key="page.filePath"
-        repo="AutumnFishs/blog"
-        repo-id="R_kgDOM9s-0A"
-        category="Announcements"
-        category-id="DIC_kwDOM9s-0M4CjVeh"
-        mapping="pathname"
-        strict="0"
-        reactions-enabled="1"
-        emit-metadata="0"
-        input-position="top"
-        lang="zh-CN"
-        crossorigin="anonymous"
-        loading="lazy"
-        :theme="isDark ? 'dark' : 'light'"
-      />
+      <Giscus :key="page.filePath" repo="AutumnFishs/blog" repo-id="R_kgDOM9s-0A" category="Announcements"
+        category-id="DIC_kwDOM9s-0M4CjVeh" mapping="pathname" strict="0" reactions-enabled="1" emit-metadata="0"
+        input-position="top" lang="zh-CN" crossorigin="anonymous" loading="lazy" :theme="isDark ? 'dark' : 'light'" />
     </template>
 
     <!-- prev & next -->
     <template #aside-outline-before>
-      <BlogPager :posts="posts"></BlogPager>
+      <!-- <BlogPager :posts="posts"></BlogPager> -->
     </template>
     <!-- doc bottom -->
     <template #doc-bottom>
@@ -109,7 +96,7 @@ const handleChange = (pageInfo) => {
     </template>
     <!-- doc top -->
     <template #doc-top>
-      <BlogSidebar />
+      <!-- <BlogSidebar /> -->
     </template>
   </Layout>
 </template>

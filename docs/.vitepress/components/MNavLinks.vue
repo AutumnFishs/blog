@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-// @ts-ignore
 import { slugify } from '@mdit-vue/shared'
 
 import MNavLink from './MNavLink.vue'

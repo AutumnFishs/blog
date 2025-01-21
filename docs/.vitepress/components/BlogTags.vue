@@ -19,7 +19,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, unref, computed, onMounted } from 'vue'
 import { data } from '../theme/post.data'
 import { withBase } from 'vitepress'
