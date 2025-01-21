@@ -11,7 +11,6 @@ export const nav: DefaultTheme.NavItem[] = [
     text: "分类",
     link: "/pages/category",
   },
-  { text: "标签", link: "/pages/tags" },
   { text: "日志", link: "/pages/logs" },
   { text: "关于", link: "/pages/about" },
 ];

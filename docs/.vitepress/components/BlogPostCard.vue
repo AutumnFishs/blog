@@ -30,7 +30,7 @@ defineProps({
         </div>
         <div class='post-info'>
             <a v-for="(tag, i) in tags" :key="i" v-text="tag" class="tag"
-                :href="withBase(`/pages/tags?tag=${tag}` || '')"></a>
+                :href="withBase(`/pages/category?tag=${tag}` || '')"></a>
         </div>
         <p class="abstract" v-html="abstract"></p>
     </div>
@@ -108,11 +108,6 @@ defineProps({
 
 
 }
-
-
-
-
-
 
 @media screen and (max-width: 768px) {
     .post-header {

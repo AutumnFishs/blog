@@ -1,18 +1,8 @@
 <template>
     <div class="blog-tags">
-        <div class="tags">
-            <div v-for="(tag, i) in tags" :key="i" class="tag" @click="onTagClick(tag)">
-                <span>{{ tag }}</span>
-                <span class="tag-count"> {{ computedTagMap[tag].length }} </span>篇
-            </div>
-        </div>
-        <p v-text="currentTag" class="current-tag"></p>
-        <ul>
-            <li v-for="(article, index) in postList" :key="index" class="card">
-                <a v-text="article.title" :href="withBase(article.url)" class="post-dot">
-                </a>
-                <div v-text="article.date.string" class="post-date">
-                </div>
+        <ul ref="list" class="tag-cloud">
+            <li v-for="tag in tags" :key="tag">
+                <a @click="onTagClick(tag)">{{ tag }}</a>
             </li>
         </ul>
     </div>
@@ -20,28 +10,93 @@
 </template>
 
 <script setup lang="ts">
-import { ref, unref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { data } from '../theme/post.data'
-import { withBase } from 'vitepress'
 
-const { tagMap, postMap } = data
+const { tagMap } = data
 const tags = Object.keys(tagMap)
-const computedTagMap = computed(() => {
-    let result = {}
-    for (let key in tagMap) {
-        result[key] = tagMap[key].map(url => postMap[url])
-    }
-    return result
-})
 
-const currentTag = ref()
 function onTagClick(newTag) {
-    currentTag.value = newTag
+    let baseUrl = window.location.href.split(/[?#]/)[0]; // 移除hash和查询参数部分
+    window.location.href = `${baseUrl}?tag=${newTag}`;
 }
-const postList = computed(() => (unref(computedTagMap)[unref(currentTag)]))
+const list = ref()
+
+// 添加接口定义
+interface Position {
+    top: number;
+    left: number;
+}
+
+const randomizeStyles = () => {
+    const container = list.value;
+    const lis = container.querySelectorAll('li');
+    const positions: Position[] = [];
+    const width = container.offsetWidth;
+    const height = width * 0.6; // 高度为宽度的3/5
+    
+    const minDistance = width * 0.07; // 动态计算最小距离
+    const radiusX = width * 0.46; // 横向半径
+    const radiusY = height * 0.425; // 纵向半径
+    const centerX = width * 0.5; // 中心点X
+    const centerY = height * 0.5; // 中心点Y
+    const padding = width * 0.04; // 动态边距
+
+    lis.forEach(li => {
+        let validPosition = false;
+        let attempts = 0;
+        let top, left;
+
+        while (!validPosition && attempts < 150) {
+            const angle = Math.random() * 2 * Math.PI;
+            const distance = Math.sqrt(Math.random());
+            left = centerX + radiusX * distance * Math.cos(angle);
+            top = centerY + radiusY * distance * Math.sin(angle);
+            
+            if (top < padding || top > height - padding || left < padding || left > width - padding) {
+                attempts++;
+                continue;
+            }
+            
+            validPosition = true;
+            for (const pos of positions) {
+                const dist = Math.sqrt(
+                    Math.pow(top - pos.top, 2) + 
+                    Math.pow(left - pos.left, 2)
+                );
+                const fontSize = Math.min(width * 0.05, Math.max(width * 0.015, Math.random() * (width * 0.04 - width * 0.015) + width * 0.015));
+                const requiredDistance = minDistance + fontSize / 2;
+                if (dist < requiredDistance) {
+                    validPosition = false;
+                    break;
+                }
+            }
+            attempts++;
+        }
+
+        if (validPosition) {
+            positions.push({ top, left });
+            const fontSize = Math.min(width * 0.05, Math.max(width * 0.015, Math.random() * (width * 0.04 - width * 0.015) + width * 0.015));
+            li.style.color = `hsl(${Math.random() * 360}, 80%, 65%)`;
+            li.style.fontSize = `${fontSize}px`;
+            li.style.top = `${top}px`;
+            li.style.left = `${left}px`;
+            li.style.transition = 'all 0.3s ease';
+        } else {
+            const angle = (positions.length * Math.PI * 2) / lis.length;
+            left = centerX + radiusX * Math.cos(angle);
+            top = centerY + radiusY * Math.sin(angle);
+            positions.push({ top, left });
+            li.style.color = `hsl(${Math.random() * 360}, 80%, 65%)`;
+            li.style.fontSize = `${width * 0.015}px`; // 最小字体大小
+            li.style.top = `${top}px`;
+            li.style.left = `${left}px`;
+            li.style.transition = 'all 0.3s ease';
+        }
+    });
+}
 onMounted(() => {
-    const searchParams = new URLSearchParams(window.location.search)
-    if (searchParams.get('tag')) currentTag.value = searchParams.get('tag')
+    randomizeStyles()
 })
 
 </script>
@@ -53,65 +108,41 @@ onMounted(() => {
     padding: 24px 32px;
     margin: 0 auto;
 
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
+    .tag-cloud {
+        width: 100%; // 撑满父元素
+        aspect-ratio: 5/3; // 设置宽高比为5:3
+        position: relative;
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        border-radius: 50% / 30%;
+        border: 1px solid var(--vp-c-divider-light);
+    }
 
-        .tag {
-            padding: 4px 16px;
-            background: var(--vp-c-bg-alt);
-            color: var(--vp-c-text-1);
-            cursor: pointer;
+    li {
+        position: absolute;
+        cursor: pointer;
+        padding: 8px;
+        transform: translate(-50%, -50%);
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            filter: brightness(1.1);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
 
             &:hover {
-                color: var(--vp-c-brand);
-                display: block;
-            }
-
-            .tag-count {
-                padding-left: 4px;
-                color: var(--vp-c-brand);
+                text-decoration: underline;
             }
         }
     }
 
-    .current-tag {
-        font-size: 24px;
-        line-height: 32px;
-        padding: 16px 0;
+    .tags, .current-tag, .card, .article-list {
+        display: none;
     }
-
-    .card {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 4px 0px;
-
-        .post-dot {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
-        .post-date {
-            padding-left: 4px;
-            white-space: nowrap;
-        }
-
-        .post-dot::before {
-            display: inline-block;
-            content: '';
-            margin-right: 10px;
-            width: 4px;
-            height: 4px;
-            line-height: 18px;
-            border-radius: 50%;
-            background-color: var(--vp-c-brand-1);
-            vertical-align: middle;
-        }
-
-    }
-
 }
 </style>

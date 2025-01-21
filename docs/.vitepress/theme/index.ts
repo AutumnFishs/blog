@@ -7,14 +7,12 @@ import MyLayout from "../components/MyLayout.vue";
 import MNavLinks from "../components/MNavLinks.vue";
 import MNavLink from "../components/MNavLink.vue";
 import MButton from "../components/MButton.vue";
+
 import Home from "../components/Home.vue";
 import BlogPostCard from "../components/BlogPostCard.vue";
-import BlogArchives from "../components/BlogArchives.vue";
 import BlogTags from "../components/BlogTags.vue";
 import BlogGoTop from "../components/BlogGoTop.vue";
-import BlogPager from "../components/BlogPager.vue";
 import BlogImageViewer from "../components/BlogImageViewer.vue";
-import BlogSidebar from "../components/BlogSidebar.vue";
 
 // vue预览组件插件
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
@@ -55,12 +53,9 @@ export default {
     app.component("MButton", MButton);
     app.component("Home", Home);
     app.component("BlogPostCard", BlogPostCard);
-    app.component("BlogArchives", BlogArchives);
     app.component("BlogGoTop", BlogGoTop);
     app.component("BlogTags", BlogTags);
-    app.component("BlogPager", BlogPager);
     app.component("BlogImageViewer", BlogImageViewer);
-    app.component("BlogSidebar", BlogSidebar);
 
     useComponents(app, DemoPreview);
   },
