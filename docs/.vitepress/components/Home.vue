@@ -9,30 +9,23 @@
           {{ item }}
         </li>
       </ul>
-      <div ref="headerBtnRef" class="header-btn" @click="handleClick">
-        <svg class="icon" t="1736307361577" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-          p-id="1879">
-          <path
-            d="M529.408 210.688c-66.816 0-121.088 54.272-121.088 119.552v189.184c0 66.816 55.552 119.552 121.088 119.552 66.816 0 119.552-54.272 119.552-119.552V330.24c0-66.816-54.016-119.552-119.552-119.552z m93.184 307.2c0 51.456-41.728 93.184-93.184 93.184s-94.464-41.728-94.464-93.184v-189.184c0-51.456 43.008-93.184 94.464-93.184s93.184 41.728 93.184 93.184v189.184z"
-            fill="#444444" p-id="1880"></path>
-          <path
-            d="M528.128 289.792c-6.912 0-13.824 5.632-13.824 13.824v66.816c0 6.912 5.632 13.824 13.824 13.824 6.912 0 13.824-5.632 13.824-13.824v-66.816c0-8.192-5.632-13.824-13.824-13.824z"
-            fill="#D86E1B" p-id="1881"></path>
-          <path
-            d="M528.128 864.256l19.456-32 19.456-32-37.632 15.36-37.632-15.36 36.352 64zM523.776 750.08h8.448v8.448h-8.448zM523.776 733.44h8.448v8.448h-8.448zM523.776 716.8h8.448v8.448h-8.448z"
-            fill="#444444" p-id="1882"></path>
-        </svg>
-      </div>
     </header>
     <main class="main relative" ref="mainRef">
-      <slot name="main"></slot>
+      <BlogPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
+        :title="article.title" :abstract="article.abstract" :date="article.date" :tags="article.tags" />
+      <div class="main-pagination">
+        <Pagination v-model:pageSize="pageSize" :total="posts.length" size="small" @change="handleChange"
+          :totalContent="false" :showPageSize="false" />
+      </div>
     </main>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { useData } from "vitepress";
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref, computed } from "vue";
+import { data } from "../theme/post.data";
+import { Pagination } from "tdesign-vue-next";
 const { site, frontmatter } = useData();
 
 const headerBtnRef = ref();
@@ -66,10 +59,6 @@ onMounted(() => {
 
 // 滚动到文章列表
 const mainRef = ref();
-const handleClick = () => {
-  mainRef.value?.scrollIntoView({ behavior: "smooth" });
-};
-
 const blog = frontmatter.value.blog;
 const inspiringTimeout = blog.inspiringTimeout || 10000;
 const isShowInspiring = ref(0);
@@ -77,6 +66,24 @@ let timer = ref();
 onUnmounted(() => {
   clearInterval(timer.value)
 })
+
+// 文章列表
+const posts = computed(() =>
+  Object.values(data.postMap).sort((a, b) => b.date.time - a.date.time)
+);
+
+const computedRecentPosts = computed(() =>
+  posts.value
+    .map((item) => ({ ...item, date: item.date.string }))
+    .slice((pageNum.value - 1) * pageSize.value, pageNum.value * pageSize.value)
+);
+
+// 分页
+const pageNum = ref(1);
+const pageSize = ref(10);
+const handleChange = (pageInfo) => {
+  pageNum.value = pageInfo.current;
+};
 </script>
 
 <style scoped lang="scss">
@@ -89,8 +96,7 @@ onUnmounted(() => {
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 100vh;
-    padding-bottom: 100px;
+    padding: 100px 0 0;
 
     .logo {
       width: 50px;
@@ -119,21 +125,25 @@ onUnmounted(() => {
         font-size: 16px;
       }
     }
-
-    .header-btn {
-      position: absolute;
-      bottom: 100px;
-
-      .icon {
-        width: 50px;
-        height: 50px;
-      }
-    }
   }
 
   .main {
     padding-top: 88px;
     min-height: calc(100vh - 64px);
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+
+    .main-pagination {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+      margin: 20px;
+    }
   }
 }
 </style>

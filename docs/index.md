@@ -2,7 +2,7 @@
 layout: home
 
 blog:
- name: '秋鱼的小破站'
+ name: '秋鱼的个人博客'
  desc: 生活随记
  inspiring:
   - 千万不要因为走得太久，而忘记了我们为什么出发
