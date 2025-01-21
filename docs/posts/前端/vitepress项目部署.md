@@ -31,9 +31,7 @@ tags: [Vitepress]
 
 ## github page 部署
 1. 在项目中添加.github文件夹，创建workflows子文件夹，并创建deploy.yml部署文件
-::: info 提示
-这里的文件名并不一定要命名为deploy，只要和文件里命名一样即可
-:::
+
 ```yml
 # 构建 VitePress 站点并将其部署到 GitHub Pages 的示例工作流程
 # 工作流命名
@@ -123,3 +121,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 ```
+::: warning 注意
+这里的文件名并不一定要命名为deploy，只要和文件里命名一样即可
+:::
