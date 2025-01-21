@@ -4,16 +4,17 @@ title: 归档
 sidebar: false
 ---
 <div class="archives-main">
-        <div class="list" v-for="year in yearList" :key="year">
-            <div class="year" v-text="year"></div>
-            <div class="post-list" v-for="(article, index2) in computedYearMap[year]" :key="index2">
-                <a class="post-dot" v-text="article.title" :href="withBase(article.url)">
-                </a>
-                <div class="desc" v-text="article.date.string">
-                </div>
+    <div class="list" v-for="year in yearList" :key="year">
+        <div class="year" v-text="year"></div>
+        <div class="post-list" v-for="(article, index2) in computedYearMap[year]" :key="index2">
+            <a class="post-dot" v-text="article.title" :href="withBase(article.url)">
+            </a>
+            <div class="desc" v-text="article.date.string">
             </div>
         </div>
     </div>
+</div>
+
 <script setup lang='ts'>
 import { withBase } from 'vitepress'
 import { computed } from 'vue'
