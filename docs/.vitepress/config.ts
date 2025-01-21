@@ -45,6 +45,16 @@ export default defineConfig({
       host: "0.0.0.0",
       port: 3001,
     },
+    resolve: {
+      alias: [
+        {
+          find: /^.*\/VPDocFooter\.vue$/,
+          replacement: fileURLToPath(
+            new URL("./components/BlogDocFooter.vue", import.meta.url)
+          ),
+        },
+      ],
+    },
   },
   /* 去除url上.html后缀 */
   cleanUrls: true,
