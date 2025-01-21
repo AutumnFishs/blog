@@ -38,8 +38,11 @@ const handleClick = (title) =>{
     router.go(`${router.route.path}?tag=${title}`)
 }
 function getQueryParam(param) {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(param);
+    if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(param);
+    }
+    return 
 }
 const currentTag = computed(()=>getQueryParam("tag"))
 const computedTagMap = computed(() => {
