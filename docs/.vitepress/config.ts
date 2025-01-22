@@ -21,7 +21,7 @@ const GITHUB_REPOSITORY = basename(process.env.GITHUB_REPOSITORY || "");
 
 export default defineConfig({
   // 基准路径
-  base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/blog", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
+  base: GITHUB_REPOSITORY ? `/${GITHUB_REPOSITORY}/` : "/", //在git上部署时，需要设置base，在vercel上部署时设置为/即可
   /* 站点标题 */
   title: "秋鱼的个人博客",
   /* 站点描述 */
