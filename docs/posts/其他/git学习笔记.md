@@ -52,4 +52,9 @@ git remote set-url --add --push origin https://gitee.com/yourusername/yourreposi
 # origin  https://github.com/AutumnFishs/blog.git (fetch)
 # origin  https://gitee.com/heyingjie0805/blog.git (push)
 # origin  https://gitee.com/heyingjie0805/blog.git (push)
+
+# 清除关联地址
+git remote remove origin
+
+# 
 ```
