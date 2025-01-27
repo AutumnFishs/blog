@@ -18,3 +18,5 @@ nest new project-name
 ```
 :::
 
+## 集成Prisma，简化数据库操作
+快速查阅文章地址：[Nest中集成Prisma](./Nest中集成Prisma.md)

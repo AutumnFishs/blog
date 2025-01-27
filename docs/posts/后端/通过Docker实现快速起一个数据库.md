@@ -1,9 +1,10 @@
 ---
-title: 数据库学习笔记
+title: 通过Docker实现快速起一个数据库
 date: 2025-01-23
 abstract: 搭建博客后台管理时，存放文章需要使用数据库存放，这里通过docker快速起一个mysql并通过adminer实习图形化界面管理。
+tags: [Docker,数据库]
 ---
-# 数据库学习笔记
+# 通过Docker实现快速起一个数据库
 
 ## docker拉取镜像并创建容器
 1. 拉取mysql8镜像、 phpmyadmin镜像
@@ -41,4 +42,5 @@ taskkill /PID 7528 /F
 主要是我本地安装了mysql一直没有关掉，在使用docker起容器的时候给我整出了报错...
 :::
 
-## 
+## nest项目中集成数据库
+[Nest中集成Prisma](./Nest中集成Prisma.md)

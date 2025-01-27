@@ -37,31 +37,33 @@ const pager = computed(() => {
       <div v-for="(post, i) in pager" :key="post.url" class="pager-item"
         :class="post.title !== router.route.data.title ? 'is-opacity' : ''">
         <a :href="withBase(post.url)">cd ..{{ post.url }}</a>
-        <span class="date">{{ post.date }}</span>
+        <!-- <span class="date">{{ post.date }}</span> -->
       </div>
     </div>
   </footer>
 </template>
 
-<style scoped>
-.pager {
-  padding: 1rem;
-}
+<style scoped lang="scss">
+.VPDocFooter {
+  text-align: center;
 
-.pager-item {
-  margin: 0.5rem 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .pager {
+    display: inline-block;
+  }
 
-.is-opacity {
-  opacity: 0.5;
-}
+  .pager-item {
+    margin: 0.5rem 0;
+  }
 
-.date {
-  color: #666;
-  font-size: 0.9em;
-  margin-left: 1rem;
+  .is-opacity {
+    opacity: 0.5;
+  }
+
+  .date {
+    color: #666;
+    font-size: 0.9em;
+    margin-left: 1rem;
+  }
+
 }
 </style>
