@@ -43,4 +43,5 @@ taskkill /PID 7528 /F
 :::
 
 ## nest项目中集成数据库
+prisma可以实现对数据库的快速操作，不再需要sql语句进行操作数据库.
 [Nest中集成Prisma](./Nest中集成Prisma.md)

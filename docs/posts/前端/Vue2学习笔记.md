@@ -103,26 +103,26 @@ vue采用的是组件化思想，在一个项目中一般都会有一个入口�
       ```
       :::
 3. 生命周期
-   - beforeCreate：实例初始化之后，数据观测和事件配置之前被调用
-   - created：实例创建完成后被立即调用
+   - `beforeCreate`：实例初始化之后，数据观测和事件配置之前被调用
+   - `created`：实例创建完成后被立即调用
      - 可以在这个生命周期去请求接口获取后端数据
-   - activated：keep-alive 组件激活时调用(第一次组件被创建时不会调用)
+   - `activated`：`keep-alive` 组件激活时调用(第一次组件被创建时不会调用)
      - 组件激活后用来完成created生命周期所做的事情
-   - beforeMount：挂载开始之前被调用
+   - `beforeMount`：挂载开始之前被调用
       - 可以在这个生命周期去请求接口获取后端数据
-   - mounted：el挂载到实例上去之后调用该钩子
+   - `mounted`：el挂载到实例上去之后调用该钩子
      - 在这个生命周期中，dom已经渲染完成，可以在这获取dom元素
-   - beforeUpdate：数据更新时调用
-   - updated：数据更新后会调用该钩子
-   - deactivated：keep-alive 组件停用时调用
-   - beforeDestroy：实例销毁之前调用。在这一步，实例仍然完全可用
+   - `beforeUpdate`：数据更新时调用
+   - `updated`：数据更新后会调用该钩子
+   - `deactivated`：`keep-alive` 组件停用时调用
+   - `beforeDestroy`：实例销毁之前调用。在这一步，实例仍然完全可用
      - 可以做一些清除事件定时器等操作，
-   - destroyed：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁  
-   - errorCaptured：在捕获一个来自后代组件的错误时被调用
+   - `destroyed`：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁  
+   - `errorCaptured`：在捕获一个来自后代组件的错误时被调用
    ![生命周期图解](/lifecycle.png)
-4. data：组件的数据，必须是一个函数，返回一个对象
-5. methods：组件的方法，可以定义一些方法，在模板中使用
-6. computed：计算属性，可以定义一些计算属性，依赖于data中的数据，进行计算
+4. `data`：组件的数据，必须是一个函数，返回一个对象
+5. `methods`：组件的方法，可以定义一些方法，在模板中使用
+6. `computed`：计算属性，可以定义一些计算属性，依赖于data中的数据，进行计算
     ::: info 示例
     ``` html
       <!-- 使用 -->
@@ -142,7 +142,7 @@ vue采用的是组件化思想，在一个项目中一般都会有一个入口�
       }}
     ```
     :::
-7. watch：监听器，可以定义一些监听器,可以用来监听路由的变化，或者监听data，props数据的变化等，然后去做一些操作，更新ui、或者数据变化等
+7. `watch`：监听器，可以定义一些监听器,可以用来监听路由的变化，或者监听data，props数据的变化等，然后去做一些操作，更新ui、或者数据变化等
     ::: info 示例
     ``` html
       <!-- 使用 -->
@@ -182,7 +182,7 @@ vue采用的是组件化思想，在一个项目中一般都会有一个入口�
     ```
     :::
 <!-- ----------------------------------- -->
-8. props：组件的属性，父组件传递到子组件的数据，或者时子组件标签上的一些属性，子组件可以通过props接收这些数据
+8. `props`：组件的属性，父组件传递到子组件的数据，或者时子组件标签上的一些属性，子组件可以通过props接收这些数据
     ::: info 示例
     ``` html
     <div class="common-header">
@@ -205,7 +205,7 @@ vue采用的是组件化思想，在一个项目中一般都会有一个入口�
     </script>
     ```
     :::
-9. components注册局部组件，只能在当前组件中使用
+9. `components`注册局部组件，只能在当前组件中使用
     ::: info 示例
     ``` html
     <common-header></common-header>
@@ -222,8 +222,8 @@ vue采用的是组件化思想，在一个项目中一般都会有一个入口�
     </script>
     ```
     :::
-10. name:组件名
-11. filters:过滤器,局部过滤器
+10. `name`:组件名
+11. `filters`:过滤器,局部过滤器
     ::: info 示例
     ``` html
       <!-- 使用 -->
@@ -280,10 +280,10 @@ vue采用的是组件化思想，在一个项目中一般都会有一个入口�
    </template>
    ```
    :::
-3. keep-alive缓存组件：
-   - include: 需要缓存的组件 
-   - exclude: 忽略缓存的组件，后设覆盖先设（源码中exclude在include后面，所以exclude会覆盖include）
-   - max:最大缓存几个组件
+3. `keep-alive`缓存组件：
+   - `include`: 需要缓存的组件 
+   - `exclude`: 忽略缓存的组件，后设覆盖先设（源码中exclude在include后面，所以exclude会覆盖include）
+   - `max`:最大缓存几个组件
    ::: info 示例
    ``` html
     <keep-alive :include="['compA', 'compB', /^comp-C-\d+$/]" exclude="[]" max="3">
@@ -291,7 +291,7 @@ vue采用的是组件化思想，在一个项目中一般都会有一个入口�
     </keep-alive>
    ```
    :::
-4. transition过渡动画组件：
+4. `transition`过渡动画组件：
    - transition
    - transition-group
    - 可以用来做页面切换的动画

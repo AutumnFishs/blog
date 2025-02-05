@@ -5,7 +5,7 @@ import { watch } from "vue";
 import { inBrowser, useData } from "vitepress";
 
 const { Layout } = DefaultTheme;
-const { isDark, page, frontmatter } = useData();
+const { isDark, page } = useData();
 
 // giscus主题跟随博客主题
 watch(isDark, (dark) => {
@@ -24,11 +24,6 @@ watch(isDark, (dark) => {
 
 <template>
   <Layout>
-    <template #layout-top>
-      <home v-if="frontmatter.layout === 'home'">
-      </home>
-    </template>
-
     <template #layout-bottom>
       <BlogGoTop />
     </template>
