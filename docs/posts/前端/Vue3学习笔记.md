@@ -655,7 +655,7 @@ function changeCount() {
 :::
 7. `triggerRef()`则是用来强制触发 shallowRef 的更新，正常情况下shallowRef的值不会像ref一样直接修改，这时候可以使用 triggerRef() 来强制更新
 ::: tip 官方示例
-```vue 
+``` ts
 // 这次变更不应触发副作用，因为这个 ref 是浅层的
 shallow.value.greet = 'Hello, universe'
 

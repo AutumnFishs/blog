@@ -55,6 +55,17 @@ git remote set-url --add --push origin https://gitee.com/yourusername/yourreposi
 
 # 清除关联地址
 git remote remove origin
+```
 
-# 
+## 更新token
+gitlab token过期
+1. 更新个人token
+2. 重新设置用户名：个人令牌token
+``` sh
+git remote set-url origin https://用户名:个人令牌token@git.qualink.com/xxx/yyy/aaa/bbb.git
+```
+
+## 在dev分支上创建新的分支并拉取指定提交的代码
+``` sh
+git checkout -b new-breach-name  hashvalue
 ```
