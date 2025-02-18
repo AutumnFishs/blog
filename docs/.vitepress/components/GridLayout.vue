@@ -19,14 +19,14 @@
             </t-form-item>
         </t-form>
         <div class="grid-css">
-            <pre><code>
-            .grid-layout { 
-            {{ Object.entries(formData.style).map(([key, value]) => `    ${key}: ${value};`).join('\n') }}
-            }
-            </code></pre>
-            <pre><code>
-            {{ formData.childrenStyle.map(style => `.grid-item { \n${Object.entries(style).map(([key, value]) => `    ${key}: ${value};`).join('\n')}\n}`).join('\n') }}
-            </code></pre>
+<pre><code>
+.grid-layout { 
+{{ Object.entries(formData.style).map(([key, value]) => `    ${key}: ${value};`).join('\n') }}
+}
+</code></pre>
+<pre><code>
+{{ formData.childrenStyle.map(style => `.grid-item { \n${Object.entries(style).map(([key, value]) => `    ${key}: ${value};`).join('\n')}\n}`).join('\n') }}
+</code></pre>
         </div>
     </div>
 </template>
