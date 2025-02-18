@@ -18,22 +18,27 @@
                 <t-textarea v-model="formData.style['grid-template-areas']" placeholder="grid-template-areas" />
             </t-form-item>
         </t-form>
-        <div class="grid-css">
-<pre><code>
-.grid-layout { 
-{{ Object.entries(formData.style).map(([key, value]) => `    ${key}: ${value};`).join('\n') }}
-}
-</code></pre>
-<pre><code>
-{{ formData.childrenStyle.map(style => `.grid-item { \n${Object.entries(style).map(([key, value]) => `    ${key}: ${value};`).join('\n')}\n}`).join('\n') }}
-</code></pre>
-        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { FormProps } from 'tdesign-vue-next';
+const props = defineProps({
+    card: {
+        type: Number,
+        default: 6,
+    },
+    style: {
+        type: Object,
+        default: () => ( {
+        display: 'grid',
+        'grid-template-columns': 'repeat(3, 1fr)',
+        'grid-template-rows': 'repeat(2, 1fr)',
+        "grid-template-areas": `"a a a" "b c c" "b c c"`,
+    }),
+    },
+})  
 function generateChildrenStyle(gridTemplateAreas) {
     // 将 grid-template-areas 字符串按行分割
     const rows = gridTemplateAreas.split('\n').map(row => row.trim()).filter(row => row);
@@ -51,25 +56,13 @@ function generateChildrenStyle(gridTemplateAreas) {
     // 转换为 childrenStyle 数组
     const childrenStyle = Array.from(areasSet).map(area => ({
         "grid-area": area,
-        border: '1px solid #5a5555',
-        borderRadius: '10px',
-        padding: '10px',
-        background: '#fff',
     }));
 
     return childrenStyle;
 }
 let formData: FormProps['data'] = ref({
-    card: 6,
-    style: {
-        display: 'grid',
-        'grid-template-columns': 'repeat(3, 1fr)',
-        'grid-template-rows': 'repeat(2, 1fr)',
-        "grid-template-areas": `"a a a" "b c c" "b c c"`,
-        padding: '10px',
-        overflow: 'auto',
-        width: '100%',
-    },
+    card: props.card,
+    style: props.style,
     childrenStyle:[
     ]
 });
@@ -80,32 +73,32 @@ watch(() => formData.value.style['grid-template-areas'], (newVal) => {
 <style lang="scss">
 .grid-layout-container {
     width: 100%;
-    // 宽高比
-    aspect-ratio: 2 / 1;
+    aspect-ratio: 3 / 1;
     display: grid;
-    grid-template-areas:"grid-layout grid-layout grid-layout-materials" "grid-css grid-css grid-css";
-    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 2fr 1fr;
     border: 1px solid #5a5555;
     border-radius: 10px;
     margin: 20px 0;
     overflow: hidden;
     background: #eee;
     box-sizing: border-box;
-    .grid-css{
-        grid-area: grid-css;
-        border-top: 5px solid #ccc;
-        overflow-y: auto;
+
+    .grid-layout {
         padding: 10px;
+        overflow-y: auto;
+        width: 100%;
+        .grid-item {
+            border: 1px solid #5a5555;
+            border-radius: 10px;
+            padding: 10px;
+            background: #fff;
+        }
     }
-    .grid-layout{
-        grid-area: grid-layout;
-    }
+
     .grid-layout-materials {
-        grid-area: grid-layout-materials;
         border-left: 5px solid #ccc;
         padding: 10px;
         background: #fff;
-        overflow-y: auto;
     }
 }
 </style>
