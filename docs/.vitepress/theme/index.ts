@@ -13,7 +13,7 @@ import BlogPostCard from "../components/BlogPostCard.vue";
 import BlogTags from "../components/BlogTags.vue";
 import BlogGoTop from "../components/BlogGoTop.vue";
 import BlogImageViewer from "../components/BlogImageViewer.vue";
-
+import GridLayout from "../components/GridLayout.vue";
 // vue预览组件插件
 import DemoPreview, { useComponents } from "@vitepress-code-preview/container";
 import "@vitepress-code-preview/container/dist/style.css";
@@ -56,6 +56,7 @@ export default {
     app.component("BlogGoTop", BlogGoTop);
     app.component("BlogTags", BlogTags);
     app.component("BlogImageViewer", BlogImageViewer);
+    app.component("GridLayout", GridLayout);
 
     useComponents(app, DemoPreview);
   },

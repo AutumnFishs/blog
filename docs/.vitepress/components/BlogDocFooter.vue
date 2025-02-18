@@ -35,9 +35,8 @@ const pager = computed(() => {
   <footer v-if="pager.length" class="VPDocFooter">
     <div class="pager">
       <div v-for="(post, i) in pager" :key="post.url" class="pager-item"
-        :class="post.title !== router.route.data.title ? 'is-opacity' : ''">
+        :class="post.title !== router.route.data.title ? 'is-opacity' : 'current-page'">
         <a :href="withBase(post.url)">cd ..{{ post.url }}</a>
-        <!-- <span class="date">{{ post.date }}</span> -->
       </div>
     </div>
   </footer>
@@ -49,21 +48,18 @@ const pager = computed(() => {
 
   .pager {
     display: inline-block;
-  }
 
-  .pager-item {
-    margin: 0.5rem 0;
-  }
+    .pager-item {
+      margin: 0.5rem 0;
+    }
 
-  .is-opacity {
-    opacity: 0.5;
-  }
+    .is-opacity {
+      opacity: 0.5;
+    }
 
-  .date {
-    color: #666;
-    font-size: 0.9em;
-    margin-left: 1rem;
+    .current-page {
+      font-size: 16px;
+    }
   }
-
 }
 </style>

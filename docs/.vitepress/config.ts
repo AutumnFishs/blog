@@ -15,6 +15,9 @@ import {
 } from "vitepress-plugin-group-icons";
 import { nav, head } from "./theme/config";
 // 主题相关配置
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { TDesignResolver } from "unplugin-vue-components/resolvers";
 
 // process.env.GITHUB_REPOSITORY 存储仓库的全名  GitHub Actions 自动设置的标准环境变量之一
 const GITHUB_REPOSITORY = basename(process.env.GITHUB_REPOSITORY || "");
@@ -40,7 +43,25 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [groupIconVitePlugin(), viteDemoPreviewPlugin(), vueJsx()],
+    plugins: [
+      groupIconVitePlugin(),
+      viteDemoPreviewPlugin(),
+      vueJsx(),
+      AutoImport({
+        resolvers: [
+          TDesignResolver({
+            library: "vue-next",
+          }),
+        ],
+      }),
+      Components({
+        resolvers: [
+          TDesignResolver({
+            library: "vue-next",
+          }),
+        ],
+      }),
+    ],
     server: {
       host: "0.0.0.0",
       port: 3001,
