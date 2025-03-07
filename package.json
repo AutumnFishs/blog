@@ -79,8 +79,7 @@
   "lint-staged": {
     "docs/**/*.{jsx,txs,ts,js,json,css,vue}": [
       "prettier --write",
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   },
   "config": {
