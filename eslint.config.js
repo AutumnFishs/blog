@@ -1,10 +1,10 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import eslintConfigPrettier from 'eslint-config-prettier'
+import js from "@eslint/js";
+import globals from "globals";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
     {
-        ignores: ['**/node_modules/**', '**/dist/**', '.git/**', '**/cache/**', '**/deps/**']
+        ignores: ["**/node_modules/**", "**/dist/**", ".git/**", "**/cache/**", "**/deps/**"]
     },
     js.configs.recommended,
     eslintConfigPrettier,
@@ -20,12 +20,12 @@ export default [
             reportUnusedDisableDirectives: true
         },
         rules: {
-            'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-            'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-            'no-unused-vars': 'warn',
-            // 'semi': ['error', 'never'],// 强制不能使用分号结尾
-            // 'quotes': ['error', 'single'], 强制引号类型单引号，使用双引号报错
-            // 'comma-dangle': ['error', 'never']// 强制末尾项不能有逗号
+            "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+            "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+            "no-unused-vars": "warn",
+            "comma-dangle": ["error", "never"],// 强制末尾项不能有逗号
+            "semi": ["error", "always"],
+            "quotes": ["error", "double"] // 强制使用一致的反勾号、双引号或单引号
         }
-    },
-]
+    }
+];

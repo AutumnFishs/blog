@@ -62,7 +62,7 @@ class PubSub2 {
    */
   private constructor() {}
 
-  public static getInstance(): PubSub2{
+  public static getInstance(): PubSub2 {
     if (!PubSub2.instance) {
       PubSub2.instance = new PubSub2();
     }

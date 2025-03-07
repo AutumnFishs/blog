@@ -1,8 +1,8 @@
 /// <reference types="vitepress/client" />
 
-import type { DefaultTheme } from 'vitepress'
+import type { DefaultTheme } from "vitepress";
 
-declare module 'vitepress' {
+declare module "vitepress" {
   export namespace DefaultTheme {
     export interface Config {
       /**
@@ -10,8 +10,8 @@ declare module 'vitepress' {
        */
       visitor?: {
         /** 统计 id（单独页面的统计会作为前缀使用）*/
-        badgeId?: string
-      }
+        badgeId?: string;
+      };
 
       /**
        * giscus 评论配置
@@ -19,14 +19,14 @@ declare module 'vitepress' {
        */
       comment?: {
         /** github 仓库地址 */
-        repo: `${string}/${string}`
+        repo: `${string}/${string}`;
         /** giscus 仓库 ID */
-        repoId: string
+        repoId: string;
         /** Discussion 分类 */
-        category: string
+        category: string;
         /** giscus 分类 ID */
-        categoryId: string
-      }
+        categoryId: string;
+      };
     }
   }
 }

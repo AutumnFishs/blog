@@ -34,6 +34,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
+    "@commitlint/cz-commitlint": "^19.6.1",
     "@eslint/js": "^9.21.0",
     "@giscus/vue": "^3.0.0",
     "@types/node": "^22.5.4",
@@ -63,6 +64,7 @@
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vitepress-code-preview/container": "^1.0.8",
     "@vitepress-code-preview/plugin": "^1.0.6",
+    "cz-conventional-changelog-zh": "^0.0.2",
     "monaco-editor": "^0.52.2",
     "tdesign-icons-vue-next": "^0.3.4",
     "tdesign-vue-next": "^1.10.6",
@@ -83,7 +85,18 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/cz-conventional-changelog-zh"
+    }
+  },
+  "json-comments": {
+    "tips": "请安装JSONComments插件为JSON文件提供注释功能, 详见: https://github.com/zhangfisher/json_comments_extension",
+    "package.json": {
+      "engines": "指定node版本",
+      "husky": "和在.husky中直接写配置文件一样，这里commit-msg，相当于在.husky中创建同名的文件",
+      "scripts.lint": "检验",
+      "scripts.lint:fix": "校验并修复",
+      "scripts.prepare": "初始化husky",
+      "scripts.cz": "代码提交暂存区并校验，校验通过自动提交到仓库"
     }
   }
 }
