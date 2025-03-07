@@ -5,17 +5,17 @@
       <div class="title">{{ blog.name }}</div>
       <div class="description">{{ blog.desc }}</div>
       <ul class="banner">
-        <li v-for="(item, index) in blog.inspiring" :key="index" v-show="isShowInspiring === index">
+        <li v-for="(item, index) in blog.inspiring" v-show="isShowInspiring === index" :key="index">
           {{ item }}
         </li>
       </ul>
     </header>
-    <main class="main relative" ref="mainRef">
+    <main ref="mainRef" class="main relative">
       <BlogPostCard v-for="(article, index) in computedRecentPosts" :key="index" :url="article.url"
         :title="article.title" :abstract="article.abstract" :date="article.date" :tags="article.tags" />
       <div class="main-pagination">
-        <Pagination v-model:pageSize="pageSize" :total="posts.length" size="small" @change="handleChange"
-          :totalContent="false" :showPageSize="false" />
+        <Pagination v-model:pageSize="pageSize" :total="posts.length" size="small" :totalContent="false"
+          :showPageSize="false" @change="handleChange" />
       </div>
     </main>
   </div>
@@ -36,7 +36,7 @@ onMounted(() => {
   }
 
   // 鼠标滚动icon显示隐藏
-  document.addEventListener("scroll", (event) => {
+  document.addEventListener("scroll", () => {
     const btnElement = headerBtnRef?.value;
     if (!btnElement) return;
     if (document.documentElement.scrollTop < 100) {
