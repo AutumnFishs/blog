@@ -70,12 +70,6 @@
     "tdesign-vue-next": "^1.10.6",
     "vue": "^3.5.10"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "docs/**/*.{jsx,txs,ts,js,json,css,vue}": [
       "prettier --write",
