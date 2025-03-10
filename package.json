@@ -22,6 +22,17 @@
   "engines": {
     "node": ">= 18"
   },
+  "lint-staged": {
+    "docs/**/*.{jsx,txs,ts,js,json,css,vue}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-zh"
+    }
+  },
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
@@ -42,6 +53,7 @@
     "@typescript-eslint/parser": "^8.26.0",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
+    "cz-conventional-changelog-zh": "^0.0.2",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^10.0.2",
     "eslint-plugin-format": "^0.1.2",
@@ -64,22 +76,10 @@
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vitepress-code-preview/container": "^1.0.8",
     "@vitepress-code-preview/plugin": "^1.0.6",
-    "cz-conventional-changelog-zh": "^0.0.2",
     "monaco-editor": "^0.52.2",
     "tdesign-icons-vue-next": "^0.3.4",
     "tdesign-vue-next": "^1.10.6",
     "vue": "^3.5.10"
-  },
-  "lint-staged": {
-    "docs/**/*.{jsx,txs,ts,js,json,css,vue}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog-zh"
-    }
   },
   "json-comments": {
     "tips": "请安装JSONComments插件为JSON文件提供注释功能, 详见: https://github.com/zhangfisher/json_comments_extension",
