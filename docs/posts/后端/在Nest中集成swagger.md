@@ -83,5 +83,18 @@ export class UserController {
 }
 
 ```
+
+## 装饰器说明
+- @ApiTags('用户管理')：用于定义控制器所属的标签，方便在swagger中分类展示
+- @ApiOperation({ summary: '创建用户' })：用于定义接口的描述信息
+- @ApiResponse({ status: 200, description: '用户创建成功' })：用于定义接口的响应信息
+- @ApiParam({ name: 'id', required: true, description: '用户ID' })：用于定义接口的请求参数信息
+- @ApiBody({ description: '创建用户', type: CreateUserDto })：用于定义接口的请求体信息
+- @ApiProperty：用于定义DTO中的必选属性信息
+- @ApiPropertyOptional：用于定义DTO中的可选属性信息
+  - @ApiProperty({ description: '文章标题' })
+  - @ApiPropertyOptional({ description: '文章内容' })
+
+
 ## 结尾
 swagger也支持按模块生成，后续补充...
